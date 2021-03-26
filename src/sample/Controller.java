@@ -45,6 +45,9 @@ public class Controller {
     Button changePage;
 
     @FXML
+    Button goPageGrille;
+
+    @FXML
     Rectangle mainRectangle;
 
 
@@ -176,11 +179,26 @@ public class Controller {
         mainTextArea.setText("Lancement de l'apprentissage");
     }
 
-    public void changePage() throws IOException {
+
+    public void changePageToGrille() throws IOException {
+            changePage("grille.fxml");
+    }
+
+
+    public void changePageToPage2() throws IOException {
+        changePage("page2.fxml");
+    }
+
+    public void changePageToPageSample() throws IOException {
+        changePage("sample.fxml");
+    }
+
+
+    public void changePage(String pageName) throws IOException {
         System.out.println("Vous changez de page");
 
         Stage stage=Main.getPrimaryStage();
-        Parent root = FXMLLoader.load(getClass().getResource("page2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource(pageName));
         stage.setScene(new Scene(root));
         stage.show();
     }
