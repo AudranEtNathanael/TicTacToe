@@ -9,13 +9,18 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 
 import static ai.Test.loadCoupsFromFile;
@@ -35,6 +40,9 @@ public class Controller {
 
     @FXML
     ProgressIndicator mainProgressIndicator;
+
+    @FXML
+    Button changePage;
 
     @FXML
     Rectangle mainRectangle;
@@ -166,5 +174,14 @@ public class Controller {
 
     public void updateText() {
         mainTextArea.setText("Lancement de l'apprentissage");
+    }
+
+    public void changePage() throws IOException {
+        System.out.println("Vous changez de page");
+
+        Stage stage=Main.getPrimaryStage();
+        Parent root = FXMLLoader.load(getClass().getResource("page2.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
