@@ -35,6 +35,8 @@
                </children>
             </HBox>
             <Button fx:id="retour" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changePage" text="Retour à l'acceuil" />
+            <Button fx:id="retour1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadFacile" text="Charger Modele Facile" />
+            <Button fx:id="retour11" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadDifficile" text="Charger Modele Difficile" />
          </children>
       </VBox>
    </children>

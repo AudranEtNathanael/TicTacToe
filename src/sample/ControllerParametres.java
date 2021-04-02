@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import static ai.Test.loadCoupsFromFile;
-
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 //import javax.swing.*;
 
 public class ControllerParametres {
@@ -38,5 +40,32 @@ public class ControllerParametres {
         stage.setScene(new Scene(root));
         stage.setTitle("TicTacToe");
         stage.show();
+    }
+
+    public void readConf(String difficulte){
+        try {
+            File myObj = new File("./resources/config.txt");
+            HashMap<String,String[]> conf=new HashMap<>();
+            Scanner myReader = new Scanner(myObj);
+            System.out.println("Fichier de configuration trouve");
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] confLine=data.split(":");
+                conf.put(confLine[0],confLine);
+            }
+            String[] searchConfig=conf.get(difficulte);
+            System.out.println(searchConfig[0]);
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Fichier de configuration pas trouve");
+            e.printStackTrace();
+        }
+    }
+
+    public void loadFacile(){
+        readConf("F");
+    }
+    public void loadDifficile(){
+        readConf("D");
     }
 }

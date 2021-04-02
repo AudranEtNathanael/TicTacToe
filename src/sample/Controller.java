@@ -3,9 +3,6 @@ package sample;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
-import ai.Test;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +16,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -180,7 +176,7 @@ public class Controller {
         System.out.println("Vous changez de page");
 
         Stage stage=Main.getPrimaryStage();
-        Parent root = FXMLLoader.load(getClass().getResource("page2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/page2.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
