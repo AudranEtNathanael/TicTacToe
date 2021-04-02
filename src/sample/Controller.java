@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -39,6 +36,9 @@ public class Controller {
 
     @FXML
     Button changePage;
+
+    @FXML
+    MenuButton difficultyButton;
 
     @FXML
     Rectangle mainRectangle;
@@ -167,7 +167,15 @@ public class Controller {
         */
     }
 
+    public void chooseEasy(){
+        System.out.println("Facile");
+        difficultyButton.setText("Facile");
+    }
 
+    public void chooseHard(){
+        System.out.println("Difficile");
+        difficultyButton.setText("Difficile");
+    }
     public void updateText() {
         mainTextArea.setText("Lancement de l'apprentissage");
     }
@@ -176,7 +184,7 @@ public class Controller {
         System.out.println("Vous changez de page");
 
         Stage stage=Main.getPrimaryStage();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/page2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../view/settings.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
