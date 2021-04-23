@@ -4,9 +4,11 @@ import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
 import javafx.concurrent.Task;
+import javafx.scene.control.ProgressBar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -14,14 +16,20 @@ import static ai.Test.loadCoupsFromFile;
 
 public class Settings {
 
+    private static HashMap<String,String[]> conf;
     public static String difficulty="F";
     private static String name="";
     private static String file="";
     private static int h = 0;
     private static double lr = 0.0;
     private static int l = 0;
+    //private static ProgressBar progressBar;
 
-   public Task<Void> task = new Task<Void>() {
+    public static HashMap<String, String[]> getConf() {
+        return conf;
+    }
+
+    public Task<Void> task = new Task<Void>() {
 
 
             @Override
@@ -70,7 +78,7 @@ public class Settings {
                             System.out.println("Error at step " + i + " is " + (error / (double) i));
                             //mainTextArea.setText(i*100/epochs + "% : Error at step "+i+" is "+ (error/(double)i));
                             updateMessage(i * 100 / epochs + "% : Error at step " + i + " is " + (error / (double) i));
-                            //progressBar.setProgress(i/epochs);*
+                            //progressBar.setProgress(i/epochs);
                         }
                         updateProgress(i, epochs);
                     }
@@ -101,11 +109,46 @@ public class Settings {
             }
         };
 
+   public void launchIA(String difficulte, ProgressBar progressBar){
+       if(readConf(difficulte)){
+           if (new File(file).exists()){
+               MultiLayerPerceptron net=MultiLayerPerceptron.load(file);
+               System.out.println("Modele charge");
+           }
+           else{
+               System.out.println("Creer nouveau modele");
+               //Settings.progressBar=progressBar;
 
-    public void readConf(String difficulte){
+               new Thread(task).start();
+               System.out.println("Fini");
+           }
+       }
+   }
+
+   public ArrayList<String> readDifficulties(){
+       try {
+           File myObj = new File("./resources/config.txt");
+           Scanner myReader = new Scanner(myObj);
+           System.out.println("Fichier de configuration trouve");
+           ArrayList<String> difficulties=new ArrayList<>();
+           while (myReader.hasNextLine()) {
+               String data = myReader.nextLine();
+               String[] confLine=data.split(":");
+               difficulties.add(confLine[0]);
+           }
+           myReader.close();
+           return difficulties;
+       } catch (FileNotFoundException e) {
+           System.out.println("Fichier de configuration pas trouve");
+           e.printStackTrace();
+       }
+       return null;
+   }
+
+    public boolean readConf(String difficulte){
         try {
             File myObj = new File("./resources/config.txt");
-            HashMap<String,String[]> conf=new HashMap<>();
+            conf=new HashMap<>();
             Scanner myReader = new Scanner(myObj);
             System.out.println("Fichier de configuration trouve");
             while (myReader.hasNextLine()) {
@@ -117,6 +160,7 @@ public class Settings {
             myReader.close();
             if (searchConfig==null){
                 System.out.println("Config souhaite non trouve");
+                return false;
             }
             else{
                 System.out.println(searchConfig[0]);
@@ -125,46 +169,22 @@ public class Settings {
                 int l=Integer.valueOf(searchConfig[3]);
                 name=searchConfig[0];
                 file="./resources/models/"+"mlp_"+name+"_"+h+"_"+lr+"_"+l+".srl";
-                if (new File(file).exists()){
-                    MultiLayerPerceptron net=MultiLayerPerceptron.load(file);
-                    System.out.println("Modele charge");
-                }
-                else{
-                    System.out.println("Creer nouveau modele");
-
-                    new Thread(task).start();
-                    System.out.println("Fini");
-                }
+                return true;
             }
         } catch (FileNotFoundException e) {
             System.out.println("Fichier de configuration pas trouve");
             e.printStackTrace();
         }
+        return false;
     }
 
-    public void delete(String difficulte){
-        try {
-            File myObj = new File("./resources/config.txt");
-            HashMap<String,String[]> conf=new HashMap<>();
-            Scanner myReader = new Scanner(myObj);
-            System.out.println("Fichier de configuration trouve");
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                String[] confLine=data.split(":");
-                conf.put(confLine[0],confLine);
-            }
-            String[] searchConfig=conf.get(difficulte);
-            myReader.close();
-            if (searchConfig==null){
+    public void delete(String config){
+            boolean find=true;
+            if (find==false){
                 System.out.println("Config souhaite non trouve");
             }
             else{
-                System.out.println(searchConfig[0]);
-                int h= Integer.valueOf(searchConfig[1]);
-                double lr= Double.valueOf(searchConfig[2]) ;
-                int l=Integer.valueOf(searchConfig[3]);
-                name=searchConfig[0];
-                file="./resources/models/"+"mlp_"+name+"_"+h+"_"+lr+"_"+l+".srl";
+                file="./resources/models/"+config;
                 File fileToDelete = new File(file);
                 if (fileToDelete.delete()){
                     System.out.println(fileToDelete.getName() + " est supprimé.");
@@ -174,10 +194,7 @@ public class Settings {
                     System.out.println("Rien a supprimer");
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Fichier de configuration pas trouve");
-            e.printStackTrace();
-        }
+
     }
 
 
