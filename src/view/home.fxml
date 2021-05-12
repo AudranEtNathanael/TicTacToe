@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <TextArea fx:id="mainTextArea" layoutX="95.0" layoutY="35.0" prefHeight="102.0" prefWidth="409.0" />
-      <Button fx:id="lauchButton" layoutX="272.0" layoutY="310.0" mnemonicParsing="false" onAction="#launchaGame" text="Launch" />
-      <ProgressBar fx:id="mainProgressBar" layoutX="201.0" layoutY="200.0" prefWidth="200.0" progress="0.0" />
-      <ProgressIndicator fx:id="mainProgressIndicator" layoutX="279.0" layoutY="241.0" progress="0.0" />
-      <Button fx:id="changePage" layoutX="48.0" layoutY="341.0" mnemonicParsing="false" onAction="#changePage" text="Paramètres" />
-      <MenuButton fx:id="difficultyButton" layoutX="404.0" layoutY="310.0" mnemonicParsing="false" text="Difficulté" />
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="36.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="mainTextArea" prefHeight="140.0" prefWidth="522.0">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </TextArea>
+            <ProgressBar fx:id="mainProgressBar" prefWidth="200.0" progress="0.0" />
+            <ProgressIndicator fx:id="mainProgressIndicator" progress="0.0" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+               <children>
+                  <Button fx:id="changePage" mnemonicParsing="false" onAction="#changePage" text="Paramètres" />
+                  <Button fx:id="launchAgainstPlayer" mnemonicParsing="false" onAction="#launchGameAgainstPlayer" text="Contre un joueur" />
+                  <Button fx:id="lauchButton" mnemonicParsing="false" onAction="#launchGameAgainstIA" text="Contre l'IA" />
+                  <MenuButton fx:id="difficultyButton" mnemonicParsing="false" text="Difficulté" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -40,10 +40,10 @@ public class Settings {
                 String namet=name;
                 String filet=file;
 
-                int[] layers=new int[l+2];
+                int[] layers=new int[lt+2];
                 layers[0]=9;
                 for (int i=0; i<l;i++){
-                    layers[i+1]=h;
+                    layers[i+1]=ht;
                 }
                 layers[layers.length-1]=9;
 

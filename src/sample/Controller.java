@@ -107,8 +107,13 @@ public class Controller implements Initializable  {
     }
 */
 
-    public void launchaGame(){
-        System.out.println("Chargement de la partie");
+    public void launchGameAgainstPlayer(){
+        System.out.println("Joueur contre joueur");
+    }
+
+
+    public void launchGameAgainstIA(){
+        System.out.println("Joueur contre IA");
         //System.out.println(difficulty);
         Settings settings=new Settings();
         settings.readConf(difficulty);
