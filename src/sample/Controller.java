@@ -118,15 +118,18 @@ public class Controller implements Initializable  {
         System.out.println("Joueur contre joueur");
 
         System.out.println("Lancement de la partie");
+        ControllerGrid.setAiGameMode(false);
         PageLoader.changePage("../view/InGame/grid.fxml", this);
     }
 
-    public void launchGameAgainstIA(){
+    public void launchGameAgainstIA() throws IOException {
         System.out.println("Joueur contre IA");
         //System.out.println(difficulty);
         Settings settings=new Settings();
         settings.readConf(difficulty);
         System.out.println("Lancement de la partie");
+        ControllerGrid.setAiGameMode(true);
+        PageLoader.changePage("../view/InGame/grid.fxml", this);
     }
 
     public void updateText() {

@@ -2,17 +2,11 @@ package sample;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -77,6 +71,10 @@ public class ControllerGrid implements Initializable {
     private List<Circle> circles;
 
     private boolean pionToPlay;  // true: cross; false: circle
+
+    private static boolean aiGameMode; // true: joue contre ia, false: joue contre un autre joueur.
+
+    public static void setAiGameMode(boolean bool) { aiGameMode = bool; }
 
     private ArrayList<Object> gameState;  // contient des null, Circle circleX ou des ImageView crossX (avec x in 0..8)
 
@@ -144,15 +142,22 @@ public class ControllerGrid implements Initializable {
                     System.out.println("PlaceHolder n°" + String.valueOf(finalI) + " clicked");
                     placeHoldersSelected.get(finalI).setVisible(false);
                     placeHolders.get(finalI).setVisible(false);
-                    if (pionToPlay) {
+                    if (aiGameMode) {
                         crosses.get(finalI).setVisible(true);
                         gameState.set(finalI, crosses.get(finalI));
                     } else {
-                        circles.get(finalI).setVisible(true);
-                        gameState.set(finalI, circles.get(finalI));
+                        if (pionToPlay) {
+                            crosses.get(finalI).setVisible(true);
+                            gameState.set(finalI, crosses.get(finalI));
+                        } else {
+                            circles.get(finalI).setVisible(true);
+                            gameState.set(finalI, circles.get(finalI));
+                        }
+                        pionToPlay = !pionToPlay;
                     }
-                    pionToPlay = !pionToPlay;
                     displayGameState();
+
+                    if (aiGameMode) playAi();
                     event.consume();
                 }
             });
@@ -176,6 +181,30 @@ public class ControllerGrid implements Initializable {
             }
         };
 //Adding event Filter
+    }
+
+    public void hidePlaceholders(){
+        for (int i=0; i<placeHoldersSelected.size(); i++) {
+            placeHoldersSelected.get(i).setVisible(false);
+        }
+        for (int i=0; i<placeHolders.size(); i++) {
+            placeHolders.get(i).setVisible(false);
+        }
+    }
+
+    public void showPlaceholders(){
+        for (int i=0; i<placeHolders.size(); i++) {
+            if(gameState.get(i) == null) {
+                placeHolders.get(i).setVisible(true);
+            }
+        }
+    }
+
+    private void playAi() {
+        System.out.println("C'est au tour de l'ia");
+        hidePlaceholders();
+        // ia joue
+        showPlaceholders();
     }
 
     private void displayGameState() {
