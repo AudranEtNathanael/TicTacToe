@@ -30,7 +30,7 @@
             <ProgressIndicator fx:id="mainProgressIndicator" progress="0.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button fx:id="changePage" mnemonicParsing="false" onAction="#changePage" text="Paramètres" />
+                  <Button fx:id="changePage" mnemonicParsing="false" onAction="#changePageToSettings" text="Paramètres" />
                   <Button fx:id="launchAgainstPlayer" mnemonicParsing="false" onAction="#launchGameAgainstPlayer" text="Contre un joueur" />
                   <Button fx:id="lauchButton" mnemonicParsing="false" onAction="#launchGameAgainstIA" text="Contre l'IA" />
                   <MenuButton fx:id="difficultyButton" mnemonicParsing="false" text="Difficulté" />

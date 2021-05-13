@@ -114,7 +114,7 @@ public class Controller implements Initializable  {
     }
 */
 
-    public void launchGameAgainstPlayer(){
+    public void launchGameAgainstPlayer() throws IOException {
         System.out.println("Joueur contre joueur");
 
         System.out.println("Lancement de la partie");
