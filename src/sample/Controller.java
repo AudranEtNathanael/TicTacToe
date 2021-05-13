@@ -3,6 +3,9 @@ package sample;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -17,12 +20,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -35,7 +37,6 @@ import static ai.Test.loadCoupsFromFile;
 import static sample.Settings.difficulty;
 
 
-//import javax.swing.*;
 
 public class Controller implements Initializable  {
 
@@ -137,6 +138,9 @@ public class Controller implements Initializable  {
     }
 
     public void changePageToSettings() throws IOException {
+        Media sound = new Media(new File("./resources/sounds/glass_001.mp3").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
         PageLoader.changePage("../view/settings.fxml", this);
     }
 

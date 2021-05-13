@@ -148,6 +148,7 @@ public class ControllerParametres implements Initializable {
             Settings settings=new Settings();
             //progressBar.progressProperty().unbind();
             //progressBar.progressProperty().bind(settings.task.progressProperty());
+
             settings.launchIA(((MenuItem)e.getSource()).getId(),progressBar);
             //loadFiles();
             //makeMenuDelete();
