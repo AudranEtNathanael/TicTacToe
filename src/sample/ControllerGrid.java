@@ -1,5 +1,8 @@
 package sample;
 
+import ai.Coup;
+import ai.MultiLayerPerceptron;
+import ai.SigmoidalTransferFunction;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -79,6 +82,8 @@ public class ControllerGrid implements Initializable {
     private ArrayList<Object> gameState;  // contient des null, Circle circleX ou des ImageView crossX (avec x in 0..8)
 
 
+    private MultiLayerPerceptron ai;
+
     private static ControllerGrid CG;
 
     public static ControllerGrid getCG(){
@@ -93,6 +98,15 @@ public class ControllerGrid implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Arrived on grille");
+
+        int[] layers=new int[Settings.getL()+2];
+        layers[0]=9;
+        for (int i=0; i<Settings.getL();i++){
+            layers[i+1]=Settings.getH();
+        }
+        layers[layers.length-1]=9;
+
+        ai = new MultiLayerPerceptron(layers, Settings.getLr(), new SigmoidalTransferFunction());
 
         pionToPlay = true;
 
@@ -203,7 +217,43 @@ public class ControllerGrid implements Initializable {
     private void playAi() {
         System.out.println("C'est au tour de l'ia");
         hidePlaceholders();
-        // ia joue
+        double[] gameStateIaIn = new double[9];
+        for(int i=0; i<gameStateIaIn.length; i++){
+            gameStateIaIn[i] = Coup.EMPTY;
+        }
+
+        for(int i=0; i<gameStateIaIn.length; i++) {
+            if (gameState.get(i) != null) {
+                if (gameState.get(i).getClass() == Circle.class) {
+                    gameStateIaIn[i] = Coup.O;
+                } else if (gameState.get(i).getClass() == ImageView.class) {
+                    gameStateIaIn[i] = Coup.X;
+                }
+            }
+        }
+
+        double[] gameStateIaOut = ai.forwardPropagation(gameStateIaIn);
+        for(int i=0; i<gameStateIaOut.length; i++){
+            System.out.println(gameStateIaOut[i]);
+        }
+
+        int caseToPlay = 0;
+        int i=0;
+        for(; i<gameStateIaOut.length; i++){
+            if(gameStateIaIn[i] == 0){
+                caseToPlay = i;
+                break;
+            }
+        }
+        for(; i<gameStateIaOut.length; i++){
+            if (gameStateIaOut[i] > caseToPlay && gameStateIaIn[i] == 0){
+                caseToPlay = i;
+            }
+        }
+        System.out.println("Max is  " + caseToPlay);
+        gameState.set(caseToPlay, circles.get(caseToPlay));
+        circles.get(caseToPlay).setVisible(true);
+
         showPlaceholders();
     }
 

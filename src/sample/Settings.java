@@ -20,8 +20,23 @@ public class Settings {
     public static String difficulty="F";
     private static String name="";
     private static String file="";
+
+    public static int getH() {
+        return h;
+    }
+
     private static int h = 0;
+
+    public static double getLr() {
+        return lr;
+    }
+
     private static double lr = 0.0;
+
+    public static int getL() {
+        return l;
+    }
+
     private static int l = 0;
     private static ProgressBar progressBar;
 
