@@ -103,15 +103,8 @@ public class ControllerParametres implements Initializable {
         makeMenuDelete();
     }
 
-    public void changePage() throws IOException {
-        System.out.println("Vous changez de page");
-
-        Stage stage=Main.getPrimaryStage();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/home.fxml"));
-        stage.setScene(new Scene(root));
-        stage.setTitle("TicTacToe");
-
-        stage.show();
+    public void changePageToHome() throws IOException {
+        PageLoader.changePage("../view/home.fxml", this);
     }
 
     public void loadFiles(){

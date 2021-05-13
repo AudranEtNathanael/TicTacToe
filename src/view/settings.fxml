@@ -49,7 +49,7 @@
             <MenuButton fx:id="deleteModel" mnemonicParsing="false" text="Supprimer un modele" />
             <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" text="Actualiser" />
             <TextArea fx:id="listFiles" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="retour" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changePage" text="Retour à l'acceuil" />
+            <Button fx:id="retour" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changePageToHome" text="Retour à l'acceuil" />
          </children>
       </VBox>
    </children>

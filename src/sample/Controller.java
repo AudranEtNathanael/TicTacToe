@@ -3,15 +3,22 @@ package sample;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -109,8 +116,10 @@ public class Controller implements Initializable  {
 
     public void launchGameAgainstPlayer(){
         System.out.println("Joueur contre joueur");
-    }
 
+        System.out.println("Lancement de la partie");
+        PageLoader.changePage("../view/InGame/grid.fxml", this);
+    }
 
     public void launchGameAgainstIA(){
         System.out.println("Joueur contre IA");
@@ -124,13 +133,8 @@ public class Controller implements Initializable  {
         mainTextArea.setText("Lancement de l'apprentissage");
     }
 
-    public void changePage() throws IOException {
-        System.out.println("Vous changez de page");
-
-        Stage stage=Main.getPrimaryStage();
-        Parent root = FXMLLoader.load(getClass().getResource("../view/settings.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void changePageToSettings() throws IOException {
+        PageLoader.changePage("../view/settings.fxml", this);
     }
 
 }
