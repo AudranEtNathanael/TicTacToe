@@ -234,7 +234,7 @@ public class ControllerGrid implements Initializable {
 
         double[] gameStateIaOut = ai.forwardPropagation(gameStateIaIn);
         for(int i=0; i<gameStateIaOut.length; i++){
-            System.out.println(gameStateIaOut[i]);
+            System.out.println(i+" : " +gameStateIaOut[i]+" "+gameStateIaIn[i]);
         }
 
         int caseToPlay = 0;
@@ -246,7 +246,7 @@ public class ControllerGrid implements Initializable {
             }
         }
         for(; i<gameStateIaOut.length; i++){
-            if (gameStateIaOut[i] > caseToPlay && gameStateIaIn[i] == 0){
+            if ((gameStateIaOut[i] > gameStateIaOut[caseToPlay]) && (gameStateIaIn[i] == 0)){
                 caseToPlay = i;
             }
         }

@@ -54,7 +54,6 @@ public class Settings {
                 int lt=l;
                 String namet=name;
                 String filet=file;
-
                 int[] layers=new int[lt+2];
                 layers[0]=9;
                 for (int i=0; i<l;i++){
