@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerGrid">
+   <children>
+      <ImageView fitHeight="310.0" fitWidth="375.0" layoutX="145.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@grid.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="34.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="page Grille" />
+      <Button fx:id="homeButton" layoutX="39.0" layoutY="30.0" mnemonicParsing="false" onAction="#changePageToPageSample" text="Home" />
+      <ImageView fx:id="placeHolder5" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolder8" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolder2" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolder4" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolder7" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolder1" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolder3" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolder6" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolder0" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolderSelected.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected3" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected0" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected6" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected1" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected4" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected7" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected8" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected5" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="placeHolderSelected2" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@gridPlaceHolder.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross0" fitHeight="90.0" fitWidth="90.0" layoutX="151.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross1" fitHeight="90.0" fitWidth="90.0" layoutX="255.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross2" fitHeight="90.0" fitWidth="90.0" layoutX="361.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross3" fitHeight="90.0" fitWidth="90.0" layoutX="151.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross4" fitHeight="90.0" fitWidth="90.0" layoutX="255.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross5" fitHeight="90.0" fitWidth="90.0" layoutX="361.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross6" fitHeight="90.0" fitWidth="90.0" layoutX="151.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross7" fitHeight="90.0" fitWidth="90.0" layoutX="255.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cross8" fitHeight="90.0" fitWidth="90.0" layoutX="361.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cross.png" />
+         </image>
+      </ImageView>
+      <Circle fx:id="circle0" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="151.0" layoutY="53.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+      <Circle fx:id="circle2" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="361.0" layoutY="53.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+      <Circle fx:id="circle1" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="255.0" layoutY="53.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+      <Circle fx:id="circle3" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="151.0" layoutY="157.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+      <Circle fx:id="circle4" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="255.0" layoutY="157.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+      <Circle fx:id="circle5" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="361.0" layoutY="157.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+      <Circle fx:id="circle6" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="151.0" layoutY="260.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+      <Circle fx:id="circle7" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="255.0" layoutY="260.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+      <Circle fx:id="circle8" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="361.0" layoutY="260.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+   </children>
+</AnchorPane>

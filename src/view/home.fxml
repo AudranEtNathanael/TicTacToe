@@ -17,7 +17,7 @@
       <Button fx:id="lauchButton" layoutX="272.0" layoutY="310.0" mnemonicParsing="false" onAction="#launchaGame" text="Launch" />
       <ProgressBar fx:id="mainProgressBar" layoutX="201.0" layoutY="200.0" prefWidth="200.0" progress="0.0" />
       <ProgressIndicator fx:id="mainProgressIndicator" layoutX="279.0" layoutY="241.0" progress="0.0" />
-      <Button fx:id="changePage" layoutX="48.0" layoutY="341.0" mnemonicParsing="false" onAction="#changePage" text="Paramètres" />
+      <Button fx:id="changePage" layoutX="48.0" layoutY="341.0" mnemonicParsing="false" onAction="#changePageToSettings" text="Paramètres" />
       <MenuButton fx:id="difficultyButton" layoutX="404.0" layoutY="310.0" mnemonicParsing="false" text="Difficulté" />
    </children>
 </AnchorPane>
