@@ -23,7 +23,7 @@ public class Settings {
     private static int h = 0;
     private static double lr = 0.0;
     private static int l = 0;
-    //private static ProgressBar progressBar;
+    private static ProgressBar progressBar;
 
     public static HashMap<String, String[]> getConf() {
         return conf;
@@ -48,7 +48,7 @@ public class Settings {
                 layers[layers.length-1]=9;
 
                 try {
-
+                    progressBar.setVisible(true);
                     System.out.println();
                     System.out.println("START TRAINING ...");
                     System.out.println();
@@ -90,6 +90,8 @@ public class Settings {
                     System.out.println("Learning completed!");
 
                     net.save(filet);
+                    Thread.sleep(1000);
+                    progressBar.setVisible(false);
                 /*
                 //TEST ...
                 double[] inputs = new double[]{0.0, 1.0};
@@ -117,8 +119,9 @@ public class Settings {
            }
            else{
                System.out.println("Creer nouveau modele");
-               //Settings.progressBar=progressBar;
-
+               Settings.progressBar=progressBar;
+               progressBar.progressProperty().unbind();
+               progressBar.progressProperty().bind(task.progressProperty());
                new Thread(task).start();
                System.out.println("Fini");
            }
