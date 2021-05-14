@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -21,13 +19,9 @@
                   <Font name="Arial Bold" size="36.0" />
                </font>
             </Text>
-            <TextArea fx:id="mainTextArea" prefHeight="140.0" prefWidth="522.0">
-               <VBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </VBox.margin>
-            </TextArea>
             <ProgressBar fx:id="mainProgressBar" prefWidth="200.0" progress="0.0" visible="false" />
-            <ProgressIndicator fx:id="mainProgressIndicator" progress="0.0" />
+            <Text fx:id="percentText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+            <ProgressIndicator fx:id="mainProgressIndicator" progress="0.0" visible="false" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
                   <Button fx:id="changePage" mnemonicParsing="false" onAction="#changePageToSettings" text="Paramètres" />

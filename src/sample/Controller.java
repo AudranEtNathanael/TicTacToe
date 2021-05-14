@@ -24,6 +24,7 @@ import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,7 +45,8 @@ public class Controller implements Initializable  {
     private Button lauchButton;
 
     @FXML
-    private TextArea mainTextArea;
+    Text percentText;
+
 
     @FXML
     ProgressBar mainProgressBar;
@@ -92,7 +94,7 @@ public class Controller implements Initializable  {
             System.out.println(((MenuItem)e.getSource()).getText() + " selected");
             Settings settings=new Settings();
             difficulty=((MenuItem)e.getSource()).getId();
-            settings.launchIA(((MenuItem)e.getSource()).getId(),mainProgressBar);
+            settings.launchIA(((MenuItem)e.getSource()).getId(),mainProgressBar,percentText);
         }
     };
 
@@ -127,15 +129,15 @@ public class Controller implements Initializable  {
         System.out.println("Joueur contre IA");
         //System.out.println(difficulty);
         Settings settings=new Settings();
-        settings.readConf(difficulty);
-        System.out.println("Lancement de la partie");
+
+        settings.launchIA(difficulty,mainProgressBar,percentText);
         ControllerGrid.setAiGameMode(true);
+
         PageLoader.changePage("../view/InGame/grid.fxml", this);
+
     }
 
-    public void updateText() {
-        mainTextArea.setText("Lancement de l'apprentissage");
-    }
+
 
     public void changePageToSettings() throws IOException {
         Media sound = new Media(new File("./resources/sounds/glass_001.mp3").toURI().toString());

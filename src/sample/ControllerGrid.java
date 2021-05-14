@@ -18,6 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static sample.Settings.getFile;
+
 //import javax.swing.*;
 
 public class ControllerGrid implements Initializable {
@@ -106,7 +108,9 @@ public class ControllerGrid implements Initializable {
         }
         layers[layers.length-1]=9;
 
-        ai = new MultiLayerPerceptron(layers, Settings.getLr(), new SigmoidalTransferFunction());
+        //ai = new MultiLayerPerceptron(layers, Settings.getLr(), new SigmoidalTransferFunction());
+        System.out.println(getFile());
+        ai=MultiLayerPerceptron.load(getFile());
 
         pionToPlay = true;
 

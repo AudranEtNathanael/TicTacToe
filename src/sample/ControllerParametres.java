@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -29,6 +30,9 @@ public class ControllerParametres implements Initializable {
 
     @FXML
     TextArea listFiles;
+
+    @FXML
+    Text percentText;
 
     @FXML
     TextField difficultyField;
@@ -149,7 +153,7 @@ public class ControllerParametres implements Initializable {
             //progressBar.progressProperty().unbind();
             //progressBar.progressProperty().bind(settings.task.progressProperty());
 
-            settings.launchIA(((MenuItem)e.getSource()).getId(),progressBar);
+            settings.launchIA(((MenuItem)e.getSource()).getId(),progressBar,percentText);
             //loadFiles();
             //makeMenuDelete();
         }

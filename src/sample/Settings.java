@@ -5,6 +5,8 @@ import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
 import javafx.concurrent.Task;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,25 +23,28 @@ public class Settings {
     private static String name="";
     private static String file="";
 
+    private static int h = 0;
+    private static double lr = 0.0;
+    private static int l = 0;
+    private static ProgressBar progressBar;
+    private static Text progressText;
+
+
     public static int getH() {
         return h;
     }
-
-    private static int h = 0;
 
     public static double getLr() {
         return lr;
     }
 
-    private static double lr = 0.0;
-
     public static int getL() {
         return l;
     }
 
-    private static int l = 0;
-    private static ProgressBar progressBar;
-
+    public static String getFile(){
+        return file;
+    }
     public static HashMap<String, String[]> getConf() {
         return conf;
     }
@@ -63,6 +68,7 @@ public class Settings {
 
                 try {
                     progressBar.setVisible(true);
+                    progressText.setVisible(true);
                     System.out.println();
                     System.out.println("START TRAINING ...");
                     System.out.println();
@@ -106,6 +112,7 @@ public class Settings {
                     net.save(filet);
                     Thread.sleep(1000);
                     progressBar.setVisible(false);
+                    progressText.setVisible(false);
                 /*
                 //TEST ...
                 double[] inputs = new double[]{0.0, 1.0};
@@ -125,7 +132,7 @@ public class Settings {
             }
         };
 
-   public void launchIA(String difficulte, ProgressBar progressBar){
+   public void launchIA(String difficulte, ProgressBar progressBar, javafx.scene.text.Text text) {
        if(readConf(difficulte)){
            if (new File(file).exists()){
                MultiLayerPerceptron net=MultiLayerPerceptron.load(file);
@@ -133,10 +140,18 @@ public class Settings {
            }
            else{
                System.out.println("Creer nouveau modele");
+               progressText=text;
+               task.messageProperty().addListener((obs, oldMsg, newMsg) -> {
+                   progressText.setText(newMsg);
+               });
                Settings.progressBar=progressBar;
                progressBar.progressProperty().unbind();
                progressBar.progressProperty().bind(task.progressProperty());
-               new Thread(task).start();
+               Thread thread=new Thread(task);
+               thread.start();
+               //thread.join();
+               // new Thread(task).start();
+
                System.out.println("Fini");
            }
        }
@@ -180,11 +195,12 @@ public class Settings {
                 return false;
             }
             else{
-                System.out.println(searchConfig[0]);
-                int h= Integer.valueOf(searchConfig[1]);
-                double lr= Double.valueOf(searchConfig[2]) ;
-                int l=Integer.valueOf(searchConfig[3]);
+                //System.out.println(searchConfig[0]);
+                h= Integer.valueOf(searchConfig[1]);
+                lr= Double.valueOf(searchConfig[2]) ;
+                l=Integer.valueOf(searchConfig[3]);
                 name=searchConfig[0];
+                System.out.println("Difficulté :"+ difficulty+","+h+","+lr+","+l);
                 file="./resources/models/"+"mlp_"+name+"_"+h+"_"+lr+"_"+l+".srl";
                 return true;
             }

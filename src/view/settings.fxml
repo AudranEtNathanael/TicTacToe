@@ -46,6 +46,7 @@
             </HBox>
             <MenuButton fx:id="loadModel" mnemonicParsing="false" text="Choisir la difficulté" />
             <ProgressBar fx:id="progressBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="200.0" progress="1.0" visible="false" />
+            <Text fx:id="percentText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
             <MenuButton fx:id="deleteModel" mnemonicParsing="false" text="Supprimer un modele" />
             <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" text="Actualiser" />
             <TextArea fx:id="listFiles" prefHeight="200.0" prefWidth="200.0" />
