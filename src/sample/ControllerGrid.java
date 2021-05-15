@@ -7,16 +7,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static sample.Settings.getFile;
 
@@ -24,8 +28,16 @@ import static sample.Settings.getFile;
 
 public class ControllerGrid implements Initializable {
 
-    @FXML
-    private Button homeButton;
+    @FXML private Button homeButton;
+    @FXML private Button buttonPlayAgain;
+    @FXML private Button buttonQuit;
+
+    @FXML private Rectangle backgroundHider;
+
+    @FXML private Label labelVictoryOf;
+    @FXML private Label textVictoryOf;
+    @FXML private Label labelAgainst;
+    @FXML private Label textAgainst;
 
     @FXML private ImageView placeHolder0;
     @FXML private ImageView placeHolder1;
@@ -81,7 +93,17 @@ public class ControllerGrid implements Initializable {
 
     public static void setAiGameMode(boolean bool) { aiGameMode = bool; }
 
-    private ArrayList<Object> gameState;  // contient des null, Circle circleX ou des ImageView crossX (avec x in 0..8)
+    private double[] gameState;  // contient des null, Circle circleX ou des ImageView crossX (avec x in 0..8)
+
+    private int[][][] posToVerify = {{{6, 3}, {1, 2}},
+                                     {{0, 2}, {4, 7}},
+                                     {{0, 1}, {5, 8}},
+                                     {{0, 6}, {4, 5}},
+                                     {{1, 7}, {3, 5}, {0, 8}, {2, 6}},
+                                     {{2, 8}, {3, 4}},
+                                     {{0, 3}, {7, 8}},
+                                     {{1, 4}, {6, 8}},
+                                     {{2, 5}, {6, 7}}};
 
 
     private MultiLayerPerceptron ai;
@@ -90,10 +112,28 @@ public class ControllerGrid implements Initializable {
 
     public static ControllerGrid getCG(){
         return CG;
+
     }
 
     public ControllerGrid(){
         CG = this;
+
+        gameState = new double[9];
+        for(int i=0; i<9; i++){
+            gameState[i] = Coup.EMPTY;
+        }
+
+        int[] layers = new int[Settings.getL()+2];
+        layers[0]=9;
+        for (int i=0; i<Settings.getL(); i++){
+            layers[i+1] = Settings.getH();
+        }
+        layers[layers.length-1]=9;
+
+        //ai = new MultiLayerPerceptron(layers, Settings.getLr(), new SigmoidalTransferFunction());
+        System.out.println("File for ai is : " + getFile());
+        ai = MultiLayerPerceptron.load(getFile());
+
     }
 
 
@@ -101,23 +141,16 @@ public class ControllerGrid implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Arrived on grille");
 
-        int[] layers=new int[Settings.getL()+2];
-        layers[0]=9;
-        for (int i=0; i<Settings.getL();i++){
-            layers[i+1]=Settings.getH();
-        }
-        layers[layers.length-1]=9;
+        backgroundHider.setVisible(false);
+        labelVictoryOf.setVisible(false);
+        textVictoryOf.setVisible(false);
+        labelAgainst.setVisible(false);
+        textAgainst.setVisible(false);
 
-        //ai = new MultiLayerPerceptron(layers, Settings.getLr(), new SigmoidalTransferFunction());
-        System.out.println(getFile());
-        ai=MultiLayerPerceptron.load(getFile());
+        buttonPlayAgain.setVisible(false);
+        buttonQuit.setVisible(false);
 
         pionToPlay = true;
-
-        gameState = new ArrayList<>();
-        for(int i=0; i<9; i++) {
-            gameState.add(null);
-        }
 
         placeHolders = Arrays.asList(placeHolder0,placeHolder1, placeHolder2, placeHolder3, placeHolder4, placeHolder5, placeHolder6, placeHolder7, placeHolder8);
         placeHoldersSelected = Arrays.asList(placeHolderSelected0, placeHolderSelected1, placeHolderSelected2, placeHolderSelected3, placeHolderSelected4, placeHolderSelected5, placeHolderSelected6, placeHolderSelected7, placeHolderSelected8);
@@ -162,20 +195,54 @@ public class ControllerGrid implements Initializable {
                     placeHolders.get(finalI).setVisible(false);
                     if (aiGameMode) {
                         crosses.get(finalI).setVisible(true);
-                        gameState.set(finalI, crosses.get(finalI));
+                        gameState[finalI] = Coup.X;
                     } else {
                         if (pionToPlay) {
                             crosses.get(finalI).setVisible(true);
-                            gameState.set(finalI, crosses.get(finalI));
+                            gameState[finalI] = Coup.X;
                         } else {
                             circles.get(finalI).setVisible(true);
-                            gameState.set(finalI, circles.get(finalI));
+                            gameState[finalI] = Coup.O;
                         }
-                        pionToPlay = !pionToPlay;
                     }
-                    displayGameState();
 
-                    if (aiGameMode) playAi();
+                    displayGameState();
+                    if (isGameFinished(finalI) == null) {  // Si la partie n'est pas finie, l'autre joueur ou l'IA joue.
+                        pionToPlay = !pionToPlay;
+                        int aiPionPLayed = -1;
+                        if (aiGameMode){
+                            aiPionPLayed = playAi();
+                            if (aiPionPLayed != -1 && isGameFinished(aiPionPLayed) != null) {  // Si on ne peut plus jouer
+                                for (int i : isGameFinished(aiPionPLayed)) {
+                                    System.out.println(i);
+                                }
+                                hidePlaceholders();
+                                backgroundHider.setVisible(true);
+                                System.out.println("les " + (pionToPlay ? "croix" : "cercles") + " (IA) ont gagné");
+                            }
+                            pionToPlay = !pionToPlay;
+                        }
+
+
+                    }else if(isGameFinished(finalI) != null){  // Si on ne peut plus jouer
+                        for(int i : isGameFinished(finalI)){
+                            System.out.println(i);
+                        }
+                        hidePlaceholders();
+                        backgroundHider.setVisible(true);
+                        System.out.println("les " + (pionToPlay ? "Croix" : "Cercles") + " ont gagné");
+                        textVictoryOf.setText(pionToPlay ? "Croix" : "Cercles");
+                        textAgainst.setText(pionToPlay ? "Cercles" : "Croix");
+                        textVictoryOf.setTextFill(Color.web(pionToPlay ? "#3481eb" : "#d7292e"));
+                        textAgainst.setTextFill(Color.web(pionToPlay ? "#d7292e" : "#3481eb"));
+                        labelVictoryOf.setVisible(true);
+                        labelAgainst.setVisible(true);
+                        textVictoryOf.setVisible(true);
+                        textAgainst.setVisible(true);
+
+                        buttonPlayAgain.setVisible(true);
+                        buttonQuit.setVisible(true);
+                    }
                     event.consume();
                 }
             });
@@ -212,63 +279,51 @@ public class ControllerGrid implements Initializable {
 
     public void showPlaceholders(){
         for (int i=0; i<placeHolders.size(); i++) {
-            if(gameState.get(i) == null) {
+            if(gameState[i] == Coup.EMPTY) {
                 placeHolders.get(i).setVisible(true);
             }
         }
     }
 
-    private void playAi() {
+    private int playAi() {
         System.out.println("C'est au tour de l'ia");
         hidePlaceholders();
-        double[] gameStateIaIn = new double[9];
-        for(int i=0; i<gameStateIaIn.length; i++){
-            gameStateIaIn[i] = Coup.EMPTY;
-        }
 
-        for(int i=0; i<gameStateIaIn.length; i++) {
-            if (gameState.get(i) != null) {
-                if (gameState.get(i).getClass() == Circle.class) {
-                    gameStateIaIn[i] = Coup.O;
-                } else if (gameState.get(i).getClass() == ImageView.class) {
-                    gameStateIaIn[i] = Coup.X;
-                }
-            }
-        }
-
-        double[] gameStateIaOut = ai.forwardPropagation(gameStateIaIn);
+        double[] gameStateIaOut = ai.forwardPropagation(gameState);
         for(int i=0; i<gameStateIaOut.length; i++){
-            System.out.println(i+" : " +gameStateIaOut[i]+" "+gameStateIaIn[i]);
+            System.out.println(i+" : " +gameStateIaOut[i]+" "+gameState[i]);
         }
 
         int caseToPlay = 0;
         int i=0;
         for(; i<gameStateIaOut.length; i++){
-            if(gameStateIaIn[i] == 0){
+            if(gameState[i] == 0){
                 caseToPlay = i;
                 break;
             }
         }
         for(; i<gameStateIaOut.length; i++){
-            if ((gameStateIaOut[i] > gameStateIaOut[caseToPlay]) && (gameStateIaIn[i] == 0)){
+            if ((gameStateIaOut[i] > gameStateIaOut[caseToPlay]) && (gameState[i] == 0)){
                 caseToPlay = i;
             }
         }
         System.out.println("Max is  " + caseToPlay);
-        gameState.set(caseToPlay, circles.get(caseToPlay));
+        gameState[caseToPlay] = Coup.O;
         circles.get(caseToPlay).setVisible(true);
 
         showPlaceholders();
+
+        return caseToPlay;
     }
 
     private void displayGameState() {
-        for(int i=0; i<gameState.size(); i++){
+        for(int i=0; i<gameState.length; i++){
             if(i%3 == 0){
                 System.out.print("\n");
             }
-            if(gameState.get(i) == null){
+            if(gameState[i] == 0){
                 System.out.print("   ");
-            }else if(gameState.get(i).getClass() == Circle.class){
+            }else if(gameState[i] == Coup.O){
                 System.out.print(" O ");
             }else{
                 System.out.print(" X ");
@@ -278,8 +333,29 @@ public class ControllerGrid implements Initializable {
     }
 
 
+
+    private int[] isGameFinished(int posPLayed){
+        int intPionToPlay = pionToPlay ? Coup.X : Coup.O;
+        for(int[] currentPosToVerify : posToVerify[posPLayed]){
+            if(gameState[currentPosToVerify[0]] == intPionToPlay && gameState[currentPosToVerify[1]] == intPionToPlay){
+                return new int[]{posPLayed, currentPosToVerify[0], currentPosToVerify[1]};
+            }
+        }
+
+        for(int i=0; i<gameState.length; i++){
+            if(gameState[i] == Coup.EMPTY) return null;  // Si on peut encore jouer
+        }
+
+        return new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};  // Si il n'y a pas de gagnant, on retourne toute les cases pour les animer
+    }
+
+
     public void changePageToPageSample() throws IOException {
         PageLoader.changePage("../view/home.fxml", this);
+    }
+
+    public void changePageToGrid() throws IOException {
+        PageLoader.changePage("../view/InGame/grid.fxml", this);
     }
 
 
