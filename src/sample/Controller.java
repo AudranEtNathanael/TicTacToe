@@ -127,13 +127,15 @@ public class Controller implements Initializable  {
 
     public void launchGameAgainstIA() throws IOException {
         System.out.println("Joueur contre IA");
-        //System.out.println(difficulty);
         Settings settings=new Settings();
-
-        settings.launchIA(difficulty,mainProgressBar,percentText);
-        ControllerGrid.setAiGameMode(true);
-
-        PageLoader.changePage("../view/InGame/grid.fxml", this);
+        if(settings.launchIA(difficulty,mainProgressBar,percentText)){
+            ControllerGrid.setAiGameMode(true);
+            PageLoader.changePage("../view/InGame/grid.fxml", this);
+        }
+        else{
+            System.out.println("Veuillez sélectionner une difficulté");
+        }
+        //System.out.println(difficulty);
 
     }
 

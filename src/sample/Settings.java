@@ -94,14 +94,17 @@ public class Settings {
 
                         error += net.backPropagate(c.in, c.out);
 
+                        if (i%100==0){
+                            updateMessage(i * 100 / epochs + "%");
+                        }
                         if (i % 10000 == 0) {
                             System.out.println("Error at step " + i + " is " + (error / (double) i));
                             //mainTextArea.setText(i*100/epochs + "% : Error at step "+i+" is "+ (error/(double)i));
-                            updateMessage(i * 100 / epochs + "% : Error at step " + i + " is " + (error / (double) i));
                             //progressBar.setProgress(i/epochs);
                         }
                         updateProgress(i, epochs);
                     }
+                    updateMessage(100+"%");
                     error /= epochs;
                     if (epochs > 0) {
                         System.out.println("Error is " + error);
@@ -132,11 +135,12 @@ public class Settings {
             }
         };
 
-   public void launchIA(String difficulte, ProgressBar progressBar, javafx.scene.text.Text text) {
+   public boolean launchIA(String difficulte, ProgressBar progressBar, javafx.scene.text.Text text) {
        if(readConf(difficulte)){
            if (new File(file).exists()){
                MultiLayerPerceptron net=MultiLayerPerceptron.load(file);
                System.out.println("Modele charge");
+               return true;
            }
            else{
                System.out.println("Creer nouveau modele");
@@ -151,10 +155,11 @@ public class Settings {
                thread.start();
                //thread.join();
                // new Thread(task).start();
-
                System.out.println("Fini");
+               return false;
            }
        }
+       return false;
    }
 
    public ArrayList<String> readDifficulties(){
@@ -201,6 +206,14 @@ public class Settings {
                 l=Integer.valueOf(searchConfig[3]);
                 name=searchConfig[0];
                 System.out.println("Difficulté :"+ difficulty+","+h+","+lr+","+l);
+                File dossier = new File("./resources/models/");
+                boolean res = dossier.mkdir();
+                if(res) {
+                    System.out.println("Le dossier a été créé.");
+                }
+                else {
+                    System.out.println("Le dossier existe déja.");
+                }
                 file="./resources/models/"+"mlp_"+name+"_"+h+"_"+lr+"_"+l+".srl";
                 return true;
             }
