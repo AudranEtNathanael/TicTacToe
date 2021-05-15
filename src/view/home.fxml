@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -12,25 +15,76 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe" textAlignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe !" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold" size="36.0" />
                </font>
             </Text>
             <ProgressBar fx:id="mainProgressBar" prefWidth="200.0" progress="0.0" visible="false" />
             <Text fx:id="percentText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <VBox alignment="CENTER" onMouseClicked="#changePageToSettings" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="86.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Settings.PNG" />
+                           </image>
+                        </ImageView>
+                        <Label text="Réglages">
+                           <font>
+                              <Font name="Avenir Next Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#launchGameAgainstIA" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="115.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@onePLayer.PNG" />
+                           </image>
+                        </ImageView>
+                        <Label text="Jouer seul">
+                           <font>
+                              <Font name="Avenir Next Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" onMouseClicked="#launchGameAgainstPlayer" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="86.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@twoPlayers.PNG" />
+                           </image>
+                        </ImageView>
+                        <Label text="Jouer à deux">
+                           <font>
+                              <Font name="Avenir Next Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
             <ProgressIndicator fx:id="mainProgressIndicator" progress="0.0" visible="false" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <Button fx:id="changePage" mnemonicParsing="false" onAction="#changePageToSettings" text="Paramètres" />
-                  <Button fx:id="launchAgainstPlayer" mnemonicParsing="false" onAction="#launchGameAgainstPlayer" text="Contre un joueur" />
-                  <Button fx:id="lauchButton" mnemonicParsing="false" onAction="#launchGameAgainstIA" text="Contre l'IA" />
-                  <MenuButton fx:id="difficultyButton" mnemonicParsing="false" text="Difficulté" />
+                  <MenuButton fx:id="difficultyButton" mnemonicParsing="false" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="Difficulté" />
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="70.0" top="70.0" />
+         </padding>
       </VBox>
+      <ImageView fitHeight="31.0" fitWidth="27.0" layoutX="557.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@soundOn.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

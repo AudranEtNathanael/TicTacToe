@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -28,11 +29,12 @@ import static sample.Settings.getFile;
 
 public class ControllerGrid implements Initializable {
 
-    @FXML private Button homeButton;
+    @FXML private ImageView homeButton;
     @FXML private Button buttonPlayAgain;
     @FXML private Button buttonQuit;
 
     @FXML private Rectangle backgroundHider;
+    @FXML private VBox backgroundHiderHolder;
 
     @FXML private Label labelVictoryOf;
     @FXML private Label textVictoryOf;
@@ -95,15 +97,15 @@ public class ControllerGrid implements Initializable {
 
     private double[] gameState;  // contient des null, Circle circleX ou des ImageView crossX (avec x in 0..8)
 
-    private int[][][] posToVerify = {{{6, 3}, {1, 2}},
+    private int[][][] posToVerify = {{{6, 3}, {1, 2}, {4, 8}},
                                      {{0, 2}, {4, 7}},
-                                     {{0, 1}, {5, 8}},
+                                     {{0, 1}, {5, 8}, {4, 6}},
                                      {{0, 6}, {4, 5}},
                                      {{1, 7}, {3, 5}, {0, 8}, {2, 6}},
                                      {{2, 8}, {3, 4}},
-                                     {{0, 3}, {7, 8}},
+                                     {{0, 3}, {7, 8}, {2, 4}},
                                      {{1, 4}, {6, 8}},
-                                     {{2, 5}, {6, 7}}};
+                                     {{2, 5}, {6, 7}, {0, 4}}};
 
 
     private MultiLayerPerceptron ai;
@@ -141,6 +143,7 @@ public class ControllerGrid implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Arrived on grille");
 
+        backgroundHiderHolder.setVisible(false);
         backgroundHider.setVisible(false);
         labelVictoryOf.setVisible(false);
         textVictoryOf.setVisible(false);
@@ -207,6 +210,7 @@ public class ControllerGrid implements Initializable {
                     }
 
                     displayGameState();
+                    System.out.println("pion to play : " + (pionToPlay ? "Croix" : "Cercles"));
                     if (isGameFinished(finalI) == null) {  // Si la partie n'est pas finie, l'autre joueur ou l'IA joue.
                         pionToPlay = !pionToPlay;
                         int aiPionPLayed = -1;
@@ -217,6 +221,7 @@ public class ControllerGrid implements Initializable {
                                     System.out.println(i);
                                 }
                                 hidePlaceholders();
+                                backgroundHiderHolder.setVisible(true);
                                 backgroundHider.setVisible(true);
                                 System.out.println("les " + (pionToPlay ? "croix" : "cercles") + " (IA) ont gagné");
                             }
@@ -224,11 +229,12 @@ public class ControllerGrid implements Initializable {
                         }
 
 
-                    }else if(isGameFinished(finalI) != null){  // Si on ne peut plus jouer
+                    }else{  // Si on ne peut plus jouer
                         for(int i : isGameFinished(finalI)){
                             System.out.println(i);
                         }
                         hidePlaceholders();
+                        backgroundHiderHolder.setVisible(true);
                         backgroundHider.setVisible(true);
                         System.out.println("les " + (pionToPlay ? "Croix" : "Cercles") + " ont gagné");
                         textVictoryOf.setText(pionToPlay ? "Croix" : "Cercles");
@@ -255,17 +261,6 @@ public class ControllerGrid implements Initializable {
         for (Circle currentCircle : circles){
             currentCircle.setVisible(false);
         }
-
-
-
-        //Creating the mouse event handler
-        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                System.out.println("Hello World");
-            }
-        };
-//Adding event Filter
     }
 
     public void hidePlaceholders(){
@@ -337,6 +332,7 @@ public class ControllerGrid implements Initializable {
     private int[] isGameFinished(int posPLayed){
         int intPionToPlay = pionToPlay ? Coup.X : Coup.O;
         for(int[] currentPosToVerify : posToVerify[posPLayed]){
+            System.out.println(intPionToPlay + " " + gameState[currentPosToVerify[0]] + " " + gameState[currentPosToVerify[1]]);
             if(gameState[currentPosToVerify[0]] == intPionToPlay && gameState[currentPosToVerify[1]] == intPionToPlay){
                 return new int[]{posPLayed, currentPosToVerify[0], currentPosToVerify[1]};
             }

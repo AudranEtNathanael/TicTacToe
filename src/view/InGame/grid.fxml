@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -12,187 +16,297 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerGrid">
    <children>
-      <ImageView fitHeight="310.0" fitWidth="375.0" layoutX="145.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="310.0" fitWidth="310.0" layoutX="145.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@grid.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="placeHolder5" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolder8" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolder2" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolder4" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolder7" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolder1" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolder3" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolder6" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolder0" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolderSelected.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected3" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected0" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected6" fitHeight="90.0" fitWidth="109.0" layoutX="151.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected1" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected4" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected7" fitHeight="90.0" fitWidth="109.0" layoutX="255.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected8" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected5" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="placeHolderSelected2" fitHeight="90.0" fitWidth="109.0" layoutX="361.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@gridPlaceHolder.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross0" fitHeight="90.0" fitWidth="90.0" layoutX="151.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross1" fitHeight="90.0" fitWidth="90.0" layoutX="255.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross2" fitHeight="90.0" fitWidth="90.0" layoutX="361.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross3" fitHeight="90.0" fitWidth="90.0" layoutX="151.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross4" fitHeight="90.0" fitWidth="90.0" layoutX="255.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross5" fitHeight="90.0" fitWidth="90.0" layoutX="361.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross6" fitHeight="90.0" fitWidth="90.0" layoutX="151.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross7" fitHeight="90.0" fitWidth="90.0" layoutX="255.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="cross8" fitHeight="90.0" fitWidth="90.0" layoutX="361.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@cross.png" />
-         </image>
-      </ImageView>
-      <Circle fx:id="circle0" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="151.0" layoutY="53.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Circle fx:id="circle2" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="361.0" layoutY="53.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Circle fx:id="circle1" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="255.0" layoutY="53.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Circle fx:id="circle3" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="151.0" layoutY="157.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Circle fx:id="circle4" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="255.0" layoutY="157.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Circle fx:id="circle5" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="361.0" layoutY="157.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Circle fx:id="circle6" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="151.0" layoutY="260.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Circle fx:id="circle7" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="255.0" layoutY="260.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Circle fx:id="circle8" centerX="45.0" centerY="45.0" fill="#1f93ff00" layoutX="361.0" layoutY="260.0" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
-      <Rectangle fx:id="backgroundHider" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="400.0" layoutX="-1.0" opacity="0.83" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-      <Button fx:id="homeButton" layoutX="39.0" layoutY="30.0" mnemonicParsing="false" onAction="#changePageToPageSample" text="Home" />
+      <VBox layoutX="151.0" layoutY="53.0" maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0" prefHeight="300.0" prefWidth="300.0" spacing="15.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <HBox prefHeight="133.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder0" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected0" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle0" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross0" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder1" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected1" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle1" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross1" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder2" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected2" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle2" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross2" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+            <HBox prefHeight="133.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder3" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected3" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle3" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross3" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder4" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected4" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle4" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross4" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder5" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected5" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle5" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross5" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+            <HBox prefHeight="133.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder6" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected6" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle6" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross6" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder7" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected7" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle7" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross7" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="placeHolder8" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolderSelected.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="placeHolderSelected8" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gridPlaceHolder.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circle8" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
+                        <ImageView fx:id="cross8" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@cross.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
       <Text layoutX="34.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="page Grille" />
-      <Label fx:id="labelVictoryOf" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="60.0" layoutY="108.0" prefHeight="43.0" prefWidth="240.0" text="Victoire de ">
+      <ImageView fx:id="homeButton" fitHeight="27.0" fitWidth="27.0" layoutX="34.0" layoutY="66.0" onMouseClicked="#changePageToPageSample" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@../home.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="50.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatatDetectiveRed.PNG" />
+         </image>
+      </ImageView>
+      <Label fx:id="textAgainst1" layoutX="483.0" layoutY="162.0" text="Charlotte" textFill="#d7292e">
          <font>
-            <Font name="Avenir Next Bold" size="30.0" />
+            <Font name="Avenir Next Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="textVictoryOf" layoutX="316.0" layoutY="108.0" text="Didier" textFill="#3481eb">
+      <Label fx:id="textVictoryOf1" alignment="CENTER" layoutX="483.0" layoutY="195.0" prefHeight="23.0" prefWidth="91.0" text="Didier" textFill="#3481eb">
          <font>
-            <Font name="Avenir Next Bold" size="30.0" />
+            <Font name="Avenir Next Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="labelAgainst" alignment="CENTER_RIGHT" layoutX="85.0" layoutY="179.0" prefHeight="43.0" prefWidth="214.0" text="Contre ">
-         <font>
-            <Font name="Avenir Next Bold" size="30.0" />
-         </font>
-      </Label>
-      <Label fx:id="textAgainst" layoutX="316.0" layoutY="182.0" text="Charlotte" textFill="#d7292e">
-         <font>
-            <Font name="Avenir Next Bold" size="30.0" />
-         </font>
-      </Label>
-      <Button fx:id="buttonPlayAgain" layoutX="145.0" layoutY="276.0" mnemonicParsing="false" onAction="#changePageToGrid" prefHeight="57.0" prefWidth="134.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 2; -fx-background-radius: 15;" text="Rejouer">
-         <font>
-            <Font name="Avenir Next Bold" size="25.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonQuit" layoutX="322.0" layoutY="276.0" mnemonicParsing="false" onAction="#changePageToPageSample" prefHeight="57.0" prefWidth="134.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 2; -fx-background-radius: 15;" text="Quitter">
-         <font>
-            <Font name="Avenir Next Bold" size="25.0" />
-         </font>
-      </Button>
+      <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="62.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatarLambdaBlue.PNG" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="backgroundHider" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="400.0" opacity="0.83" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox fx:id="backgroundHiderHolder" prefHeight="400.0" prefWidth="600.0" visible="false">
+         <children>
+            <HBox prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="labelVictoryOf" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="133.0" prefWidth="300.0" text="Victoire de ">
+                     <font>
+                        <Font name="Avenir Next Bold" size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="textVictoryOf" text="Didier" textFill="#3481eb">
+                     <font>
+                        <Font name="Avenir Next Bold" size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="15.0" top="100.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="labelAgainst" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="43.0" prefWidth="214.0" text="Contre ">
+                     <font>
+                        <Font name="Avenir Next Bold" size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" top="-10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="textAgainst" text="Charlotte" textFill="#d7292e">
+                     <font>
+                        <Font name="Avenir Next Bold" size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="60.0" top="-10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="buttonPlayAgain" mnemonicParsing="false" onAction="#changePageToGrid" prefHeight="57.0" prefWidth="134.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 2; -fx-background-radius: 15;" text="Rejouer">
+                     <font>
+                        <Font name="Avenir Next Bold" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="145.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonQuit" mnemonicParsing="false" onAction="#changePageToPageSample" prefHeight="57.0" prefWidth="134.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 2; -fx-background-radius: 15;" text="Quitter">
+                     <font>
+                        <Font name="Avenir Next Bold" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="42.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
