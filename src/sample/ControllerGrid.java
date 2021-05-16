@@ -2,9 +2,7 @@ package sample;
 
 import ai.Coup;
 import ai.MultiLayerPerceptron;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -165,7 +163,7 @@ public class ControllerGrid implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     /*
-                    ColorAdjust colorAdjust = new ColorAdjust();
+                    ColorAdjust colorAdjust = new ColforAdjust();
                     colorAdjust.setContrast(0.3);
                     colorAdjust.setHue(-0.05);
                     colorAdjust.setBrightness(0.9);
@@ -259,19 +257,35 @@ public class ControllerGrid implements Initializable {
                             aiPionPLayed = playAi();
                             isGameFinishedResult = isGameFinished(aiPionPLayed);
                             if (aiPionPLayed != -1 && isGameFinishedResult != null) {  // Si on ne peut plus jouer
-                                for (int i : isGameFinishedResult) System.out.println(i);
-                                showWinningScreen(isGameFinishedResult);
+                                gameFinishedResult(isGameFinishedResult);
                             }
                             pionToPlay = !pionToPlay;
                         }
                     }else{  // Si on ne peut plus jouer
-                        for(int i : isGameFinishedResult) System.out.println(i);
-                        showWinningScreen(isGameFinishedResult);
+                        gameFinishedResult(isGameFinishedResult);
                     }
                     event.consume();
                 }
             });
         }
+    }
+
+    private void gameFinishedResult(int[] isGameFinishedResult) {
+        for (int i : isGameFinishedResult) {
+            System.out.println(i);
+            Node pion = (gameState[i] == Coup.X ? crosses : circles).get(i);
+
+            final ScaleTransition scaleAnimation = new ScaleTransition(Duration.seconds(2), pion);
+            scaleAnimation.setCycleCount(TranslateTransition.INDEFINITE);
+            scaleAnimation.setAutoReverse(true);
+            scaleAnimation.setFromX(0.5);
+            scaleAnimation.setToX(2);
+            scaleAnimation.setFromY(0.5);
+            scaleAnimation.setToY(2);
+            scaleAnimation.setInterpolator(Interpolator.LINEAR);
+            scaleAnimation.play();
+        }
+        showWinningScreen(isGameFinishedResult);
     }
 
 
