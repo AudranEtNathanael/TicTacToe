@@ -37,6 +37,8 @@ public class ControllerGrid implements Initializable {
     List<Node> controls;
 
     // Indication du joueur à qui c'est le tour
+    private final double LITTLE_SIZE = 0.6;
+    private final double BIG_SIZE = 1;
     @FXML private Label textPlayer1;
     @FXML private Label textPlayer2;
     @FXML private ImageView iconPlayer1;
@@ -153,6 +155,16 @@ public class ControllerGrid implements Initializable {
         placeHoldersSelected = Arrays.asList(placeHolderSelected0, placeHolderSelected1, placeHolderSelected2, placeHolderSelected3, placeHolderSelected4, placeHolderSelected5, placeHolderSelected6, placeHolderSelected7, placeHolderSelected8);
         crosses = Arrays.asList(cross0, cross1, cross2, cross3, cross4, cross5, cross6, cross7, cross8);
         circles = Arrays.asList(circle0, circle1, circle2, circle3, circle4, circle5, circle6, circle7, circle8);
+
+        iconPlayer1.setScaleX(BIG_SIZE);
+        iconPlayer1.setScaleY(BIG_SIZE);
+        textPlayer1.setScaleX(BIG_SIZE);
+        textPlayer1.setScaleY(BIG_SIZE);
+
+        iconPlayer2.setScaleX(LITTLE_SIZE);
+        iconPlayer2.setScaleY(LITTLE_SIZE);
+        textPlayer2.setScaleX(LITTLE_SIZE);
+        textPlayer2.setScaleY(LITTLE_SIZE);
 
         pionToPlay = true;
 
@@ -297,22 +309,19 @@ public class ControllerGrid implements Initializable {
             final double player2SizeTargetY = pionToPlay ? 1 : currentNodeGroup[0].getScaleY() - currentNodeGroup[1].getScaleY();
 
  */
-            final double LITTLE_SIZE_FOR_PLAYER_1 = 0.6;
-            final double LITTLE_SIZE_FOR_PLAYER_2 = 0.8;
-            final double BIG_SIZE_FOR_PLAYER_2 = 1.3;
 
-            final double player1SizeFromX = pionToPlay ? LITTLE_SIZE_FOR_PLAYER_1 : 1;
-            final double player2SizeFromX = pionToPlay ? BIG_SIZE_FOR_PLAYER_2 : LITTLE_SIZE_FOR_PLAYER_2;
-            final double player1SizeFromY = pionToPlay ? LITTLE_SIZE_FOR_PLAYER_1 : 1;
-            final double player2SizeFromY = pionToPlay ? BIG_SIZE_FOR_PLAYER_2 : LITTLE_SIZE_FOR_PLAYER_2;
+            double player1SizeFromX = pionToPlay ? LITTLE_SIZE : 1;
+            double player2SizeFromX = pionToPlay ? BIG_SIZE : LITTLE_SIZE;
+            double player1SizeFromY = pionToPlay ? LITTLE_SIZE : 1;
+            double player2SizeFromY = pionToPlay ? BIG_SIZE : LITTLE_SIZE;
 
-            final double player1SizeTargetX = pionToPlay ? 1 : LITTLE_SIZE_FOR_PLAYER_1;
-            final double player2SizeTargetX = pionToPlay ? LITTLE_SIZE_FOR_PLAYER_2 : BIG_SIZE_FOR_PLAYER_2;
-            final double player1SizeTargetY = pionToPlay ? 1 : LITTLE_SIZE_FOR_PLAYER_1;
-            final double player2SizeTargetY = pionToPlay ? LITTLE_SIZE_FOR_PLAYER_2 : BIG_SIZE_FOR_PLAYER_2;
+            double player1SizeTargetX = pionToPlay ? 1 : LITTLE_SIZE;
+            double player2SizeTargetX = pionToPlay ? LITTLE_SIZE : BIG_SIZE;
+            double player1SizeTargetY = pionToPlay ? 1 : LITTLE_SIZE;
+            double player2SizeTargetY = pionToPlay ? LITTLE_SIZE : BIG_SIZE;
 
 
-            final TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.5), currentNodeGroup[0]);
+            TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.5), currentNodeGroup[0]);
             translateAnimation.setCycleCount(1);
             translateAnimation.setAutoReverse(false);
             translateAnimation.setFromY(player1FromY);
@@ -320,7 +329,7 @@ public class ControllerGrid implements Initializable {
             translateAnimation.setInterpolator(Interpolator.LINEAR);
             translateAnimation.play();
 
-            final ScaleTransition scaleAnimation = new ScaleTransition(Duration.seconds(0.5), currentNodeGroup[0]);
+            ScaleTransition scaleAnimation = new ScaleTransition(Duration.seconds(0.5), currentNodeGroup[0]);
             scaleAnimation.setCycleCount(1);
             scaleAnimation.setAutoReverse(false);
             scaleAnimation.setFromX(player1SizeFromX);
@@ -330,7 +339,7 @@ public class ControllerGrid implements Initializable {
             scaleAnimation.setInterpolator(Interpolator.LINEAR);
             scaleAnimation.play();
 
-            final TranslateTransition translateAnimation2 = new TranslateTransition(Duration.seconds(0.5), currentNodeGroup[1]);
+            TranslateTransition translateAnimation2 = new TranslateTransition(Duration.seconds(0.5), currentNodeGroup[1]);
             translateAnimation2.setCycleCount(1);
             translateAnimation2.setAutoReverse(false);
             translateAnimation2.setFromY(player2FromY);
@@ -338,7 +347,7 @@ public class ControllerGrid implements Initializable {
             translateAnimation2.setInterpolator(Interpolator.LINEAR);
             translateAnimation2.play();
 
-            final ScaleTransition scaleAnimation2 = new ScaleTransition(Duration.seconds(0.5), currentNodeGroup[1]);
+            ScaleTransition scaleAnimation2 = new ScaleTransition(Duration.seconds(0.5), currentNodeGroup[1]);
             scaleAnimation2.setCycleCount(1);
             scaleAnimation2.setAutoReverse(false);
             scaleAnimation2.setFromX(player2SizeFromX);
