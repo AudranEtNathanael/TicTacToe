@@ -54,6 +54,17 @@ public class ControllerGrid implements Initializable {
     @FXML private ImageView iconPlayer1;
     @FXML private ImageView iconPlayer2;
 
+    private static String player1Name;
+    private static String player2Name;
+
+    public static void setplayer1Name(String player1Name) {
+        ControllerGrid.player1Name = player1Name;
+    }
+
+    public static void setplayer2Name(String player2Name) {
+        ControllerGrid.player2Name = player2Name;
+    }
+
     // Ecran de fin  (Sur la meme scène pour avoir la partie en arrière plan)
     @FXML private Rectangle backgroundHider;
     @FXML private VBox backgroundHiderHolder;
@@ -118,6 +129,26 @@ public class ControllerGrid implements Initializable {
 
     private static boolean aiGameMode; // true: joue contre ia, false: joue contre un autre joueur.
 
+    public static void setAvatarCrossRes(String avatarCrossRes) {
+        ControllerGrid.avatarCrossRes = avatarCrossRes;
+    }
+
+    public static String getAvatarCrossRes() {
+        return avatarCrossRes;
+    }
+
+    private static String avatarCrossRes = new String("avatarLambda");
+
+    public static void setAvatarCircleRes(String avatarCircleRes) {
+        ControllerGrid.avatarCircleRes = avatarCircleRes;
+    }
+
+    public static String getAvatarCircleRes() {
+        return avatarCircleRes;
+    }
+
+    private static String avatarCircleRes = new String("avatarLambda");
+
     public static void setAiGameMode(boolean bool) { aiGameMode = bool; }
 
     private double[] gameState;  // contient des null, Circle circleX ou des ImageView crossX (avec x in 0..8)
@@ -169,13 +200,19 @@ public class ControllerGrid implements Initializable {
         pionToPlay = true;
         toggleCursor();
 
+        iconPlayer1.setImage(new Image(aiGameMode ? "view/avatar/avatarLambdaBlue.png" : "view/avatar/" + avatarCrossRes + "Blue.png"));
         iconPlayer1.setScaleX(BIG_SIZE);
         iconPlayer1.setScaleY(BIG_SIZE);
+
+        textPlayer1.setText(aiGameMode ? "Vous" : player1Name);
         textPlayer1.setScaleX(BIG_SIZE);
         textPlayer1.setScaleY(BIG_SIZE);
 
+        iconPlayer2.setImage(new Image(aiGameMode ? "view/avatar/avatarComputer.png" : "view/avatar/" + avatarCircleRes + "Red.png"));
         iconPlayer2.setScaleX(LITTLE_SIZE);
         iconPlayer2.setScaleY(LITTLE_SIZE);
+
+        textPlayer2.setText(aiGameMode ? "Ordinateur" : player2Name);
         textPlayer2.setScaleX(LITTLE_SIZE);
         textPlayer2.setScaleY(LITTLE_SIZE);
 

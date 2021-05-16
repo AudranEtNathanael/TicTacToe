@@ -177,7 +177,8 @@ public class Controller implements Initializable  {
         playClickSound();
         System.out.println("Lancement de la partie");
         ControllerGrid.setAiGameMode(false);
-        PageLoader.changePage("../view/grid.fxml", this);
+        ControllerPlayerMenu.setCrossToChoose(true);
+        PageLoader.changePage("../view/menuPlayer.fxml", this);
     }
 
     public void launchGameAgainstIA() throws IOException {
