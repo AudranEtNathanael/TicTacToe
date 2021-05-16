@@ -279,9 +279,9 @@ public class ControllerGrid implements Initializable {
             scaleAnimation.setCycleCount(TranslateTransition.INDEFINITE);
             scaleAnimation.setAutoReverse(true);
             scaleAnimation.setFromX(0.5);
-            scaleAnimation.setToX(2);
+            scaleAnimation.setToX(1.5);
             scaleAnimation.setFromY(0.5);
-            scaleAnimation.setToY(2);
+            scaleAnimation.setToY(1.5);
             scaleAnimation.setInterpolator(Interpolator.LINEAR);
             scaleAnimation.play();
         }
