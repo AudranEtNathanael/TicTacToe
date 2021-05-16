@@ -7,6 +7,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -39,8 +40,7 @@ import java.net.URL;
 import java.util.*;
 
 import static ai.Test.loadCoupsFromFile;
-import static sample.Settings.difficulty;
-
+import static sample.Settings.*;
 
 
 public class Controller implements Initializable  {
@@ -80,7 +80,7 @@ public class Controller implements Initializable  {
 
     public void initialize(URL location, ResourceBundle resources) {
         makeMenuLoad();
-
+        Settings.initializeSoundIcon(soundControl);
         controls = Arrays.asList(settings, playAgainstAi, playWithFriend, soundControl);
 
         for(int i=0; i<controls.size(); i++) {
@@ -145,6 +145,7 @@ public class Controller implements Initializable  {
     EventHandler<ActionEvent> loadMenu = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
+            playClickSound();
             System.out.println(((MenuItem)e.getSource()).getText() + " selected");
             Settings settings=new Settings();
             difficulty=((MenuItem)e.getSource()).getId();
@@ -173,7 +174,7 @@ public class Controller implements Initializable  {
 
     public void launchGameAgainstPlayer() throws IOException {
         System.out.println("Joueur contre joueur");
-
+        playClickSound();
         System.out.println("Lancement de la partie");
         ControllerGrid.setAiGameMode(false);
         PageLoader.changePage("../view/grid.fxml", this);
@@ -181,6 +182,7 @@ public class Controller implements Initializable  {
 
     public void launchGameAgainstIA() throws IOException {
         System.out.println("Joueur contre IA");
+        playClickSound();
         Settings settings=new Settings();
         if(settings.launchIA(difficulty,mainProgressBar,percentText)){
             ControllerGrid.setAiGameMode(true);
@@ -193,12 +195,18 @@ public class Controller implements Initializable  {
 
     }
 
+    public void clickSound(){
+        playClickSound();
+        Settings.clickOnSoundIcon(soundControl);
+    }
 
+    public void click(){
+        playClickSound();
+    }
 
     public void changePageToSettings() throws IOException {
-        Media sound = new Media(new File("./resources/sounds/glass_001.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+
+        playClickSound();
         PageLoader.changePage("../view/settings.fxml", this);
     }
 

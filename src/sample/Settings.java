@@ -6,9 +6,15 @@ import ai.SigmoidalTransferFunction;
 import javafx.concurrent.Task;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +35,15 @@ public class Settings {
     private static ProgressBar progressBar;
     private static Text progressText;
 
+    private static boolean sound=true;
+
+    public static boolean getSound(){
+        return sound;
+    }
+
+    public static void setSound(boolean b){
+       sound=b;
+    }
 
     public static int getH() {
         return h;
@@ -47,6 +62,62 @@ public class Settings {
     }
     public static HashMap<String, String[]> getConf() {
         return conf;
+    }
+
+    public static void initializeSoundIcon(ImageView on)   {
+        if(sound){
+            try {
+                Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOn.PNG"));
+                on.setImage(image);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            try {
+                Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOff.PNG"));
+                on.setImage(image);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void clickOnSoundIcon(ImageView on){
+        if(sound){
+            setSound(false);
+            try {
+                Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOff.PNG"));
+                on.setImage(image);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            setSound(true);
+            try {
+                Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOn.PNG"));
+                on.setImage(image);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void playSound(String ressource){
+        if (sound){
+            Media sound = new Media(new File(ressource).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        }
+    }
+
+    public static void playClickSound(){
+        Settings.playSound("./resources/sounds/glass_001.mp3");
+    }
+
+    public static void playErrorSound(){
+        Settings.playSound("./resources/sounds/error_006.mp3");
     }
 
     public Task<Void> task = new Task<Void>() {

@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import static sample.Settings.playClickSound;
+import static sample.Settings.playErrorSound;
+
 
 //import javax.swing.*;
 
@@ -102,12 +105,14 @@ public class ControllerParametres implements Initializable {
 
 
     public void refresh(){
+        playClickSound();
         loadFiles();
         makeMenuLoad();
         makeMenuDelete();
     }
 
     public void changePageToHome() throws IOException {
+        playClickSound();
         PageLoader.changePage("../view/home.fxml", this);
     }
 
@@ -148,6 +153,7 @@ public class ControllerParametres implements Initializable {
     EventHandler<ActionEvent> loadMenu = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
+            playClickSound();
             System.out.println(((MenuItem)e.getSource()).getText() + " selected");
             Settings settings=new Settings();
             //progressBar.progressProperty().unbind();
@@ -162,6 +168,7 @@ public class ControllerParametres implements Initializable {
     EventHandler<ActionEvent>  deleteMenu= new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e)
         {
+            playClickSound();
             System.out.println(((MenuItem)e.getSource()).getText() + " selected");
             Settings settings=new Settings();
             settings.delete(((MenuItem)e.getSource()).getId());
@@ -173,12 +180,14 @@ public class ControllerParametres implements Initializable {
 
 
     public void changeConfig() {
+
         String difficultyTMP=difficultyField.getText();
         String hTMP=hField.getText();
         String lrTMP=lrField.getText();
         String lTMP=lField.getText();
         try{
             if (!difficultyTMP.isBlank() && !hTMP.isBlank() && !lrTMP.isBlank() && !lTMP.isBlank()){
+                playClickSound();
                 String conf=difficultyTMP+":"+hTMP+":"+lrTMP+":"+lTMP;
                 File file = new File("./resources/config.txt");
                 if(file.exists()){
@@ -215,11 +224,18 @@ public class ControllerParametres implements Initializable {
                     System.out.println(conf);
                 }
             }
+            else{
+                playErrorSound();
+            }
         }catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
 
+    }
+
+    public void click(){
+        playClickSound();
     }
 
 }

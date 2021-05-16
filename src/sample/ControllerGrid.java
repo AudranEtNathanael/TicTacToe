@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
-import static sample.Settings.getFile;
+import static sample.Settings.*;
 
 //import javax.swing.*;
 
@@ -172,7 +172,7 @@ public class ControllerGrid implements Initializable {
         */
 
         System.out.println("Arrived on grille");
-
+        Settings.initializeSoundIcon(soundControl);
         // à ne pas mettre directement dans le constructeur : ces listes pourraient être nulle dans le corps de cette fonction (erreur testée).
         controls = Arrays.asList(homeButton, soundControl, buttonPlayAgain, buttonQuit);
         placeHolders = Arrays.asList(placeHolder0,placeHolder1, placeHolder2, placeHolder3, placeHolder4, placeHolder5, placeHolder6, placeHolder7, placeHolder8);
@@ -194,8 +194,30 @@ public class ControllerGrid implements Initializable {
 
         // cache l'écran de fin et les pions
         hideWinningScreen();
-        for (ImageView currentCross : crosses) currentCross.setVisible(false);
-        for (Circle currentCircle : circles) currentCircle.setVisible(false);
+        for (int i=0;i<crosses.size() ;i++){
+            crosses.get(i).setVisible(false);
+            int finalI = i;
+            crosses.get(finalI).addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    playErrorSound();
+                }
+            });
+        }
+
+        for (int i=0;i<circles.size() ;i++){
+            circles.get(i).setVisible(false);
+            int finalI = i;
+            circles.get(finalI).addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    playErrorSound();
+                }
+            });
+        }
+
+
+
 
         for(int i=0; i<controls.size(); i++) {
             int finalI = i;
@@ -275,7 +297,7 @@ public class ControllerGrid implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     System.out.println("PlaceHolder n°" + String.valueOf(finalI) + " clicked");
-
+                    playClickSound();
                     // On joue le pion cliqué
                     hidePlaceholder(finalI);
                     if (pionToPlay) {
@@ -545,6 +567,10 @@ public class ControllerGrid implements Initializable {
         placeHolders.get(placeHolderNumber).setVisible(false);
     }
 
+    public void clickSound(){
+        Settings.clickOnSoundIcon(soundControl);
+    }
+
     /**
      * Cache tous les placeHolder
      */
@@ -558,10 +584,12 @@ public class ControllerGrid implements Initializable {
     }
 
     public void changePageToPageSample() throws IOException {
+        playClickSound();
         PageLoader.changePage("../view/home.fxml", this);
     }
 
     public void changePageToGrid() throws IOException {
+        playClickSound();
         PageLoader.changePage("../view/grid.fxml", this);
     }
 }

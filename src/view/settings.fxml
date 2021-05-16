@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ProgressBar?>
@@ -10,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerParametres">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerParametres">
    <children>
       <VBox alignment="CENTER" layoutY="17.0" prefHeight="358.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="17.0">
          <children>
@@ -44,10 +48,10 @@
                   <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeConfig" prefHeight="26.0" prefWidth="75.0" text="Ajouter" textAlignment="CENTER" />
                </children>
             </HBox>
-            <MenuButton fx:id="loadModel" mnemonicParsing="false" text="Choisir la difficulté" />
+            <MenuButton fx:id="loadModel" mnemonicParsing="false" onMouseClicked="#click" text="Choisir la difficulté" />
             <ProgressBar fx:id="progressBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="200.0" progress="1.0" visible="false" />
             <Text fx:id="percentText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
-            <MenuButton fx:id="deleteModel" mnemonicParsing="false" text="Supprimer un modele" />
+            <MenuButton fx:id="deleteModel" mnemonicParsing="false" onMouseClicked="#click" text="Supprimer un modele" />
             <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" text="Actualiser" />
             <TextArea fx:id="listFiles" prefHeight="200.0" prefWidth="200.0" />
             <Button fx:id="retour" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changePageToHome" text="Retour à l'acceuil" />
