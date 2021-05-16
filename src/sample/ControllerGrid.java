@@ -6,7 +6,6 @@ import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,6 +14,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -22,7 +22,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
@@ -31,6 +30,13 @@ import static sample.Settings.*;
 //import javax.swing.*;
 
 public class ControllerGrid implements Initializable {
+
+    // ressources pour le curseur de souris
+    @FXML AnchorPane baseAnchor;
+    ImageCursor blueStandardMouse = new ImageCursor(new Image("view/blueStandardMouse.png"));
+    ImageCursor redStandardMouse = new ImageCursor(new Image("view/redStandardMouse.png"));
+    ImageCursor crossMouse = new ImageCursor(new Image("view/crossMouse.png"));
+    ImageCursor circleMouse = new ImageCursor(new Image("view/circleMouse.png"));
 
     // Boutons de contrôle
     @FXML private ImageView homeButton;
@@ -117,15 +123,15 @@ public class ControllerGrid implements Initializable {
     private double[] gameState;  // contient des null, Circle circleX ou des ImageView crossX (avec x in 0..8)
 
     // Liste des cases adjacentes à vérifier pour chaque case. (évite des calculs et évite d'avoir plein de if) Si la grille étit plus grande, on procéderait autrement avec des fonction modulaires.
-    private int[][][] posToVerify = {{{6, 3}, {1, 2}, {4, 8}},
-                                     {{0, 2}, {4, 7}},
-                                     {{0, 1}, {5, 8}, {4, 6}},
-                                     {{0, 6}, {4, 5}},
-                                     {{1, 7}, {3, 5}, {0, 8}, {2, 6}},
-                                     {{2, 8}, {3, 4}},
-                                     {{0, 3}, {7, 8}, {2, 4}},
-                                     {{1, 4}, {6, 8}},
-                                     {{2, 5}, {6, 7}, {0, 4}}};
+    private int[][][] posToVerify = {{{1, 2, 3, 6}, {6, 3}, {1, 2}, {4, 8}}, // Angle gauche, ligne ouet, ligne nord, ligne nord-ouest/sud-est
+                                     {{0, 2, 4, 7}, {0, 2}, {4, 7}},
+                                     {{0, 1, 5, 8}, {0, 1}, {5, 8}, {4, 6}},
+                                     {{0, 6, 4, 5}, {0, 6}, {4, 5}},
+                                     {{1, 7, 3, 5}, {0, 2, 6, 8}, {1, 7}, {3, 5}, {0, 8}, {2, 6}},
+                                     {{2, 8, 3, 4}, {2, 8}, {3, 4}},
+                                     {{0, 3, 7, 8}, {0, 3}, {7, 8}, {2, 4}},
+                                     {{1, 4, 6, 8}, {1, 4}, {6, 8}},
+                                     {{2, 5, 6, 7}, {2, 5}, {6, 7}, {0, 4}}};
 
     // l'ia utilisée pour jouer
     private MultiLayerPerceptron ai;
@@ -151,26 +157,6 @@ public class ControllerGrid implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        /*
-        Image image = new Image(getClass().getClassLoader().getResource("view/mousse1.png").toString(), true);
-        //Image image = new Image("mousse1.png");  //pass in the image path
-        placeHolder1.setCursor(new ImageCursor(image));
-        placeHolderSelected1.setCursor(new ImageCursor(image));
-        */
-
-        /*
-        Image img1 = new Image("/view/mousse1.png");
-        Image img2 = new Image("/view/mousse2.png");
-        Image img3 = new Image("/view/mousse3.png");
-
-         */
-        /*
-        final Cursor cursor = ImageCursor.chooseBestCursor(new Image[] {img1, img2, img3}, 0, 0);
-        placeHolder1.setCursor(Cursor.CROSSHAIR);
-        placeHolderSelected1.setCursor(Cursor.CROSSHAIR);
-        */
-
         System.out.println("Arrived on grille");
         Settings.initializeSoundIcon(soundControl);
         // à ne pas mettre directement dans le constructeur : ces listes pourraient être nulle dans le corps de cette fonction (erreur testée).
@@ -179,6 +165,9 @@ public class ControllerGrid implements Initializable {
         placeHoldersSelected = Arrays.asList(placeHolderSelected0, placeHolderSelected1, placeHolderSelected2, placeHolderSelected3, placeHolderSelected4, placeHolderSelected5, placeHolderSelected6, placeHolderSelected7, placeHolderSelected8);
         crosses = Arrays.asList(cross0, cross1, cross2, cross3, cross4, cross5, cross6, cross7, cross8);
         circles = Arrays.asList(circle0, circle1, circle2, circle3, circle4, circle5, circle6, circle7, circle8);
+
+        pionToPlay = true;
+        toggleCursor();
 
         iconPlayer1.setScaleX(BIG_SIZE);
         iconPlayer1.setScaleY(BIG_SIZE);
@@ -190,7 +179,6 @@ public class ControllerGrid implements Initializable {
         textPlayer2.setScaleX(LITTLE_SIZE);
         textPlayer2.setScaleY(LITTLE_SIZE);
 
-        pionToPlay = true;
 
         // cache l'écran de fin et les pions
         hideWinningScreen();
@@ -334,6 +322,7 @@ public class ControllerGrid implements Initializable {
 
     private void changePlayer(){
         pionToPlay = !pionToPlay;
+        toggleCursor();
         final Node[][] nodesToExchange = {{textPlayer1, textPlayer2},
                                           {iconPlayer1, iconPlayer2}};
 
@@ -343,18 +332,6 @@ public class ControllerGrid implements Initializable {
 
             final double player1TargetY = pionToPlay ? 0 : currentNodeGroup[1].getLayoutY() - currentNodeGroup[0].getLayoutY();
             final double player2TargetY = pionToPlay ? 0 : currentNodeGroup[0].getLayoutY() - currentNodeGroup[1].getLayoutY();
-/*
-            final double player1SizeFromX = pionToPlay ? currentNodeGroup[1].getScaleX() - currentNodeGroup[0].getScaleX() : 1;
-            final double player2SizeFromX = pionToPlay ? currentNodeGroup[0].getScaleX() - currentNodeGroup[1].getScaleX() : 1;
-            final double player1SizeFromY = pionToPlay ? currentNodeGroup[1].getScaleY() - currentNodeGroup[0].getScaleY() : 1;
-            final double player2SizeFromY = pionToPlay ? currentNodeGroup[0].getScaleY() - currentNodeGroup[1].getScaleY() : 1;
-
-            final double player1SizeTargetX = pionToPlay ? 1 : currentNodeGroup[1].getScaleX() - currentNodeGroup[0].getScaleX();
-            final double player2SizeTargetX = pionToPlay ? 1 : currentNodeGroup[0].getScaleX() - currentNodeGroup[1].getScaleX();
-            final double player1SizeTargetY = pionToPlay ? 1 : currentNodeGroup[1].getScaleY() - currentNodeGroup[0].getScaleY();
-            final double player2SizeTargetY = pionToPlay ? 1 : currentNodeGroup[0].getScaleY() - currentNodeGroup[1].getScaleY();
-
- */
 
             double player1SizeFromX = pionToPlay ? LITTLE_SIZE : 1;
             double player2SizeFromX = pionToPlay ? BIG_SIZE : LITTLE_SIZE;
@@ -402,6 +379,15 @@ public class ControllerGrid implements Initializable {
             scaleAnimation2.setToY(player2SizeTargetY);
             scaleAnimation2.setInterpolator(Interpolator.LINEAR);
             scaleAnimation2.play();
+        }
+    }
+
+    private void toggleCursor(){
+        baseAnchor.setCursor(pionToPlay ? blueStandardMouse : redStandardMouse);
+
+        for (int i=0; i<placeHolders.size(); i++){
+            placeHolders.get(i).setCursor(pionToPlay ? crossMouse : circleMouse);
+            placeHoldersSelected.get(i).setCursor(pionToPlay ? crossMouse : circleMouse);
         }
     }
 
@@ -471,9 +457,27 @@ public class ControllerGrid implements Initializable {
     private int[] isGameFinished(int posPLayed){
         int intPionToPlay = pionToPlay ? Coup.X : Coup.O;
         for(int[] currentPosToVerify : posToVerify[posPLayed]){
-            System.out.println(intPionToPlay + " " + gameState[currentPosToVerify[0]] + " " + gameState[currentPosToVerify[1]]);
+            /*
             if(gameState[currentPosToVerify[0]] == intPionToPlay && gameState[currentPosToVerify[1]] == intPionToPlay){
                 return new int[]{posPLayed, currentPosToVerify[0], currentPosToVerify[1]};
+            }
+            */
+            boolean currentPosIsWinning = true;
+            for(int i : currentPosToVerify){
+                if(gameState[i] != intPionToPlay){
+                    currentPosIsWinning = false;
+                    break;
+                }
+            }
+            if(currentPosIsWinning){
+                System.out.println("AAAAAAAAAA");
+                int[] winningPos = new int[currentPosToVerify.length+1];
+                for(int i=0; i<currentPosToVerify.length; i++){
+                    winningPos[i] = currentPosToVerify[i];
+                }
+                winningPos[currentPosToVerify.length] = posPLayed;
+
+                return winningPos;
             }
         }
 
