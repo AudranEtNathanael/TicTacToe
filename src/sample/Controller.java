@@ -3,6 +3,11 @@ package sample;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import ai.SigmoidalTransferFunction;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
@@ -26,13 +31,12 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 import static ai.Test.loadCoupsFromFile;
 import static sample.Settings.difficulty;
@@ -41,8 +45,13 @@ import static sample.Settings.difficulty;
 
 public class Controller implements Initializable  {
 
-    @FXML
-    private Button lauchButton;
+    // Boutons de contrôle
+    @FXML private ImageView settings;
+    @FXML private ImageView playAgainstAi;
+    @FXML private ImageView playWithFriend;
+    @FXML private ImageView soundControl;
+
+    List<Node> controls;
 
     @FXML
     Text percentText;
@@ -71,6 +80,51 @@ public class Controller implements Initializable  {
 
     public void initialize(URL location, ResourceBundle resources) {
         makeMenuLoad();
+
+        controls = Arrays.asList(settings, playAgainstAi, playWithFriend, soundControl);
+
+        for(int i=0; i<controls.size(); i++) {
+            int finalI = i;
+            controls.get(finalI).addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    /*
+                    ColorAdjust colorAdjust = new ColorAdjust();
+                    colorAdjust.setContrast(0.3);
+                    colorAdjust.setHue(-0.05);
+                    colorAdjust.setBrightness(0.9);
+                    colorAdjust.setSaturation(0.7);
+                    homeButton.setEffect(colorAdjust);
+
+                     */
+
+                    final int UI_ANIMATION_TIME_MSEC = 100;
+
+                    final double MIN_RADIUS = 0.0;
+                    final double MAX_RADIUS = 2.0;
+                    // Create Gaussian Blur effect with radius = 0
+                    GaussianBlur blur = new GaussianBlur(MIN_RADIUS);
+                    controls.get(finalI).setEffect(blur);
+
+                    // Create animation effect
+                    Timeline timeline = new Timeline();
+                    KeyValue kv = new KeyValue(blur.radiusProperty(), MAX_RADIUS);
+                    KeyFrame kf = new KeyFrame(Duration.millis(UI_ANIMATION_TIME_MSEC), kv);
+                    timeline.getKeyFrames().add(kf);
+                    timeline.play();
+                }
+            });
+
+            controls.get(finalI).addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    final double RADIUS = 0.0;
+                    // Create Gaussian Blur effect with radius = 0
+                    GaussianBlur blur = new GaussianBlur(RADIUS);
+                    controls.get(finalI).setEffect(blur);
+                }
+            });
+        }
     }
 
     public void makeMenuLoad(){

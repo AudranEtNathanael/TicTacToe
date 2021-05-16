@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
@@ -33,8 +34,11 @@ public class ControllerGrid implements Initializable {
 
     // Boutons de contrôle
     @FXML private ImageView homeButton;
+    @FXML private ImageView soundControl;
     @FXML private Button buttonPlayAgain;
     @FXML private Button buttonQuit;
+
+    List<Node> controls;
 
     // Ecran de fin  (Sur la meme scène pour avoir la partie en arrière plan)
     @FXML private Rectangle backgroundHider;
@@ -142,6 +146,7 @@ public class ControllerGrid implements Initializable {
         System.out.println("Arrived on grille");
 
         // à ne pas mettre directement dans le constructeur : ces listes pourraient être nulle dans le corps de cette fonction (erreur testée).
+        controls = Arrays.asList(homeButton, soundControl, buttonPlayAgain, buttonQuit);
         placeHolders = Arrays.asList(placeHolder0,placeHolder1, placeHolder2, placeHolder3, placeHolder4, placeHolder5, placeHolder6, placeHolder7, placeHolder8);
         placeHoldersSelected = Arrays.asList(placeHolderSelected0, placeHolderSelected1, placeHolderSelected2, placeHolderSelected3, placeHolderSelected4, placeHolderSelected5, placeHolderSelected6, placeHolderSelected7, placeHolderSelected8);
         crosses = Arrays.asList(cross0, cross1, cross2, cross3, cross4, cross5, cross6, cross7, cross8);
@@ -154,45 +159,48 @@ public class ControllerGrid implements Initializable {
         for (ImageView currentCross : crosses) currentCross.setVisible(false);
         for (Circle currentCircle : circles) currentCircle.setVisible(false);
 
-        homeButton.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                /*
-                ColorAdjust colorAdjust = new ColorAdjust();
-                colorAdjust.setContrast(0.3);
-                colorAdjust.setHue(-0.05);
-                colorAdjust.setBrightness(0.9);
-                colorAdjust.setSaturation(0.7);
-                homeButton.setEffect(colorAdjust);
+        for(int i=0; i<controls.size(); i++) {
+            int finalI = i;
+            controls.get(finalI).addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    /*
+                    ColorAdjust colorAdjust = new ColorAdjust();
+                    colorAdjust.setContrast(0.3);
+                    colorAdjust.setHue(-0.05);
+                    colorAdjust.setBrightness(0.9);
+                    colorAdjust.setSaturation(0.7);
+                    homeButton.setEffect(colorAdjust);
 
-                 */
+                     */
 
-                final int UI_ANIMATION_TIME_MSEC = 100;
+                    final int UI_ANIMATION_TIME_MSEC = 100;
 
-                final double MIN_RADIUS = 0.0;
-                final double MAX_RADIUS = 2.0;
-                // Create Gaussian Blur effect with radius = 0
-                GaussianBlur blur = new GaussianBlur(MIN_RADIUS);
-                homeButton.setEffect(blur);
+                    final double MIN_RADIUS = 0.0;
+                    final double MAX_RADIUS = 2.0;
+                    // Create Gaussian Blur effect with radius = 0
+                    GaussianBlur blur = new GaussianBlur(MIN_RADIUS);
+                    controls.get(finalI).setEffect(blur);
 
-                // Create animation effect
-                Timeline timeline = new Timeline();
-                KeyValue kv = new KeyValue(blur.radiusProperty(), MAX_RADIUS);
-                KeyFrame kf = new KeyFrame(Duration.millis(UI_ANIMATION_TIME_MSEC), kv);
-                timeline.getKeyFrames().add(kf);
-                timeline.play();
-            }
-        });
+                    // Create animation effect
+                    Timeline timeline = new Timeline();
+                    KeyValue kv = new KeyValue(blur.radiusProperty(), MAX_RADIUS);
+                    KeyFrame kf = new KeyFrame(Duration.millis(UI_ANIMATION_TIME_MSEC), kv);
+                    timeline.getKeyFrames().add(kf);
+                    timeline.play();
+                }
+            });
 
-        homeButton.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                final double RADIUS = 0.0;
-                // Create Gaussian Blur effect with radius = 0
-                GaussianBlur blur = new GaussianBlur(RADIUS);
-                homeButton.setEffect(blur);
-            }
-        });
+            controls.get(finalI).addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    final double RADIUS = 0.0;
+                    // Create Gaussian Blur effect with radius = 0
+                    GaussianBlur blur = new GaussianBlur(RADIUS);
+                    controls.get(finalI).setEffect(blur);
+                }
+            });
+        }
 
 
         // un placeHolder survolé affiche le placeHolderSelected correspondant
