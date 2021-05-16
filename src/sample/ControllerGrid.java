@@ -2,17 +2,24 @@ package sample;
 
 import ai.Coup;
 import ai.MultiLayerPerceptron;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.ColorInput;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -146,6 +153,46 @@ public class ControllerGrid implements Initializable {
         hideWinningScreen();
         for (ImageView currentCross : crosses) currentCross.setVisible(false);
         for (Circle currentCircle : circles) currentCircle.setVisible(false);
+
+        homeButton.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                /*
+                ColorAdjust colorAdjust = new ColorAdjust();
+                colorAdjust.setContrast(0.3);
+                colorAdjust.setHue(-0.05);
+                colorAdjust.setBrightness(0.9);
+                colorAdjust.setSaturation(0.7);
+                homeButton.setEffect(colorAdjust);
+
+                 */
+
+                final int UI_ANIMATION_TIME_MSEC = 100;
+
+                final double MIN_RADIUS = 0.0;
+                final double MAX_RADIUS = 2.0;
+                // Create Gaussian Blur effect with radius = 0
+                GaussianBlur blur = new GaussianBlur(MIN_RADIUS);
+                homeButton.setEffect(blur);
+
+                // Create animation effect
+                Timeline timeline = new Timeline();
+                KeyValue kv = new KeyValue(blur.radiusProperty(), MAX_RADIUS);
+                KeyFrame kf = new KeyFrame(Duration.millis(UI_ANIMATION_TIME_MSEC), kv);
+                timeline.getKeyFrames().add(kf);
+                timeline.play();
+            }
+        });
+
+        homeButton.addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                final double RADIUS = 0.0;
+                // Create Gaussian Blur effect with radius = 0
+                GaussianBlur blur = new GaussianBlur(RADIUS);
+                homeButton.setEffect(blur);
+            }
+        });
 
 
         // un placeHolder survolé affiche le placeHolderSelected correspondant
@@ -380,6 +427,6 @@ public class ControllerGrid implements Initializable {
     }
 
     public void changePageToGrid() throws IOException {
-        PageLoader.changePage("../view/InGame/grid.fxml", this);
+        PageLoader.changePage("../view/grid.fxml", this);
     }
 }

@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="310.0" fitWidth="310.0" layoutX="145.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@grid.png" />
+            <Image url="@inGame/grid.png" />
          </image>
       </ImageView>
       <VBox layoutX="151.0" layoutY="53.0" maxHeight="300.0" maxWidth="300.0" minHeight="300.0" minWidth="300.0" prefHeight="300.0" prefWidth="300.0" spacing="15.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="50.0">
@@ -29,18 +29,18 @@
                      <children>
                         <ImageView fx:id="placeHolder0" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected0" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle0" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross0" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -49,18 +49,18 @@
                      <children>
                         <ImageView fx:id="placeHolder1" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected1" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle1" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross1" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -69,18 +69,18 @@
                      <children>
                         <ImageView fx:id="placeHolder2" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected2" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle2" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross2" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -93,18 +93,18 @@
                      <children>
                         <ImageView fx:id="placeHolder3" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected3" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle3" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross3" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -113,18 +113,18 @@
                      <children>
                         <ImageView fx:id="placeHolder4" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected4" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle4" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross4" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -133,18 +133,18 @@
                      <children>
                         <ImageView fx:id="placeHolder5" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected5" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle5" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross5" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -157,18 +157,18 @@
                      <children>
                         <ImageView fx:id="placeHolder6" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected6" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle6" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross6" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -177,18 +177,18 @@
                      <children>
                         <ImageView fx:id="placeHolder7" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected7" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle7" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross7" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -197,18 +197,18 @@
                      <children>
                         <ImageView fx:id="placeHolder8" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolderSelected.png" />
+                              <Image url="@inGame/gridPlaceHolderSelected.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="placeHolderSelected8" fitHeight="90.0" fitWidth="109.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@gridPlaceHolder.png" />
+                              <Image url="@inGame/gridPlaceHolder.png" />
                            </image>
                         </ImageView>
                         <Circle fx:id="circle8" centerX="45.0" centerY="45.0" fill="#1f93ff00" radius="45.0" stroke="#da1f0a" strokeType="INSIDE" strokeWidth="10.0" />
                         <ImageView fx:id="cross8" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@cross.png" />
+                              <Image url="@inGame/cross.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -220,12 +220,12 @@
       <Text layoutX="34.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="page Grille" />
       <ImageView fx:id="homeButton" fitHeight="27.0" fitWidth="27.0" layoutX="34.0" layoutY="66.0" onMouseClicked="#changePageToPageSample" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="20.0">
          <image>
-            <Image url="@../home.PNG" />
+            <Image url="@icon/home.PNG" />
          </image>
       </ImageView>
       <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="50.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@avatatDetectiveRed.PNG" />
+            <Image url="@inGame/avatarDetectiveRed.PNG" />
          </image>
       </ImageView>
       <Label fx:id="textAgainst1" layoutX="483.0" layoutY="162.0" text="Charlotte" textFill="#d7292e">
@@ -240,7 +240,7 @@
       </Label>
       <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="62.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@avatarLambdaBlue.PNG" />
+            <Image url="@inGame/avatarLambdaBlue.PNG" />
          </image>
       </ImageView>
       <Rectangle fx:id="backgroundHider" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="400.0" opacity="0.83" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -308,5 +308,10 @@
             </HBox>
          </children>
       </VBox>
+      <ImageView fx:id="homeButton1" fitHeight="27.0" fitWidth="27.0" layoutX="44.0" layoutY="76.0" onMouseClicked="#changePageToPageSample" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@icon/soundOn.PNG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

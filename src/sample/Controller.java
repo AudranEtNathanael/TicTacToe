@@ -122,7 +122,7 @@ public class Controller implements Initializable  {
 
         System.out.println("Lancement de la partie");
         ControllerGrid.setAiGameMode(false);
-        PageLoader.changePage("../view/InGame/grid.fxml", this);
+        PageLoader.changePage("../view/grid.fxml", this);
     }
 
     public void launchGameAgainstIA() throws IOException {
@@ -130,7 +130,7 @@ public class Controller implements Initializable  {
         Settings settings=new Settings();
         if(settings.launchIA(difficulty,mainProgressBar,percentText)){
             ControllerGrid.setAiGameMode(true);
-            PageLoader.changePage("../view/InGame/grid.fxml", this);
+            PageLoader.changePage("../view/grid.fxml", this);
         }
         else{
             System.out.println("Veuillez sélectionner une difficulté");

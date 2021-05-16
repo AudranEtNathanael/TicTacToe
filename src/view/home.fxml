@@ -30,7 +30,7 @@
                      <children>
                         <ImageView fitHeight="86.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@Settings.PNG" />
+                              <Image url="@icon/Settings.PNG" />
                            </image>
                         </ImageView>
                         <Label text="Réglages">
@@ -44,7 +44,7 @@
                      <children>
                         <ImageView fitHeight="115.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@onePLayer.PNG" />
+                              <Image url="@icon/onePLayer.PNG" />
                            </image>
                         </ImageView>
                         <Label text="Jouer seul">
@@ -58,7 +58,7 @@
                      <children>
                         <ImageView fitHeight="86.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@twoPlayers.PNG" />
+                              <Image url="@icon/twoPlayers.PNG" />
                            </image>
                         </ImageView>
                         <Label text="Jouer à deux">
@@ -83,7 +83,7 @@
       </VBox>
       <ImageView fitHeight="31.0" fitWidth="27.0" layoutX="557.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="20.0">
          <image>
-            <Image url="@soundOn.PNG" />
+            <Image url="@icon/soundOn.PNG" />
          </image>
       </ImageView>
    </children>
