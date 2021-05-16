@@ -6,10 +6,13 @@ import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -19,6 +22,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 
@@ -147,6 +151,26 @@ public class ControllerGrid implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        /*
+        Image image = new Image(getClass().getClassLoader().getResource("view/mousse1.png").toString(), true);
+        //Image image = new Image("mousse1.png");  //pass in the image path
+        placeHolder1.setCursor(new ImageCursor(image));
+        placeHolderSelected1.setCursor(new ImageCursor(image));
+        */
+
+        /*
+        Image img1 = new Image("/view/mousse1.png");
+        Image img2 = new Image("/view/mousse2.png");
+        Image img3 = new Image("/view/mousse3.png");
+
+         */
+        /*
+        final Cursor cursor = ImageCursor.chooseBestCursor(new Image[] {img1, img2, img3}, 0, 0);
+        placeHolder1.setCursor(Cursor.CROSSHAIR);
+        placeHolderSelected1.setCursor(Cursor.CROSSHAIR);
+        */
+
         System.out.println("Arrived on grille");
 
         // à ne pas mettre directement dans le constructeur : ces listes pourraient être nulle dans le corps de cette fonction (erreur testée).
