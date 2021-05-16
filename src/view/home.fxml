@@ -28,8 +28,11 @@
                   <Font name="Arial Bold" size="36.0" />
                </font>
             </Text>
-            <ProgressBar fx:id="mainProgressBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" progress="0.0" visible="false" />
-            <Text fx:id="percentText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
+            <ProgressBar fx:id="mainProgressBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="200.0" progress="0.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" visible="false" />
+            <Text fx:id="percentText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font></Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
                   <VBox alignment="CENTER" onMouseClicked="#changePageToSettings" prefHeight="200.0" prefWidth="100.0" spacing="10.0">

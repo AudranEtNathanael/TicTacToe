@@ -196,7 +196,7 @@ public class Controller implements Initializable  {
     }
 
     public void clickSound(){
-        playClickSound();
+
         Settings.clickOnSoundIcon(soundControl);
     }
 

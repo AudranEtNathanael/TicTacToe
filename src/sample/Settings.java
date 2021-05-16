@@ -95,6 +95,7 @@ public class Settings {
         }
         else{
             setSound(true);
+            playClickSound();
             try {
                 Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOn.PNG"));
                 on.setImage(image);

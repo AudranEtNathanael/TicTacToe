@@ -16,45 +16,63 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerParametres">
    <children>
-      <VBox alignment="CENTER" layoutY="17.0" prefHeight="358.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="17.0">
+      <VBox alignment="CENTER" layoutY="17.0" prefHeight="358.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Réglages de l'IA" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Réglages de l'IA" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font></Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulté" textAlignment="CENTER" />
-                        <TextField fx:id="difficultyField" alignment="CENTER" promptText="F" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulté" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font></Text>
+                        <TextField fx:id="difficultyField" alignment="CENTER" promptText="F" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="h" textAlignment="CENTER" />
-                        <TextField fx:id="hField" alignment="CENTER" promptText="128" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="h" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font></Text>
+                        <TextField fx:id="hField" alignment="CENTER" promptText="128" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="lr" textAlignment="CENTER" />
-                        <TextField fx:id="lrField" alignment="CENTER" promptText="0.1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="lr" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font></Text>
+                        <TextField fx:id="lrField" alignment="CENTER" promptText="0.1" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="l" textAlignment="CENTER" />
-                        <TextField fx:id="lField" alignment="CENTER" promptText="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="l" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font></Text>
+                        <TextField fx:id="lField" alignment="CENTER" promptText="2" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" />
                      </children>
                   </VBox>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeConfig" prefHeight="26.0" prefWidth="75.0" text="Ajouter" textAlignment="CENTER" />
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changeConfig" prefHeight="26.0" prefWidth="75.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="Ajouter" textAlignment="CENTER" />
                </children>
             </HBox>
-            <MenuButton fx:id="loadModel" mnemonicParsing="false" onMouseClicked="#click" text="Choisir la difficulté" />
-            <ProgressBar fx:id="progressBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="200.0" progress="1.0" visible="false" />
-            <Text fx:id="percentText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" />
-            <MenuButton fx:id="deleteModel" mnemonicParsing="false" onMouseClicked="#click" text="Supprimer un modele" />
-            <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" text="Actualiser" />
-            <TextArea fx:id="listFiles" prefHeight="200.0" prefWidth="200.0" />
-            <Button fx:id="retour" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changePageToHome" text="Retour à l'acceuil" />
+            <MenuButton fx:id="loadModel" mnemonicParsing="false" onMouseClicked="#click" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="Choisir la difficulté" />
+            <ProgressBar fx:id="progressBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="15.0" prefWidth="200.0" progress="1.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" visible="false" />
+            <Text fx:id="percentText" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="Text" visible="false">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font></Text>
+            <MenuButton fx:id="deleteModel" mnemonicParsing="false" onMouseClicked="#click" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="Supprimer un modele" />
+            <Button fx:id="refresh" mnemonicParsing="false" onAction="#refresh" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="Actualiser" />
+            <TextArea fx:id="listFiles" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" />
+            <Button fx:id="retour" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#changePageToHome" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-color: white; -fx-background-radius: 10;" text="Retour à l'acceuil" />
          </children>
       </VBox>
    </children>
