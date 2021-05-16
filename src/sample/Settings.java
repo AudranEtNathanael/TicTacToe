@@ -37,38 +37,78 @@ public class Settings {
 
     private static boolean sound=true;
 
+
+    /**
+     *
+      * @return boolean
+     *
+     * getter for sound
+     */
     public static boolean getSound(){
         return sound;
     }
 
+    /**
+     *
+     * @param b
+     *
+     * setter for sound
+     */
     public static void setSound(boolean b){
        sound=b;
     }
 
+    /**
+     *
+     * @return h
+     */
     public static int getH() {
         return h;
     }
 
+    /**
+     *
+     * @return lr
+     */
     public static double getLr() {
         return lr;
     }
 
+    /**
+     *
+     * @return l
+     */
     public static int getL() {
         return l;
     }
 
+    /**
+     *
+     * @return file
+     */
     public static String getFile(){
         return file;
     }
+
+    /**
+     *
+     * @return conf in config.txt
+     */
     public static HashMap<String, String[]> getConf() {
         return conf;
     }
 
-    public static void initializeSoundIcon(ImageView on)   {
-        if(sound){
+    /**
+     *
+     * @param imageSound
+     *
+     * change imageSound en fonction du booleen sound
+     */
+    public static void initializeSoundIcon(ImageView imageSound)   {
+        if(sound){  //si le son est activé
             try {
                 Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOn.PNG"));
-                on.setImage(image);
+                imageSound.setImage(image);     //affiche l image SoundOn
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -76,35 +116,47 @@ public class Settings {
         else{
             try {
                 Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOff.PNG"));
-                on.setImage(image);
+                imageSound.setImage(image);         //affiche l image SoundOff
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static void clickOnSoundIcon(ImageView on){
-        if(sound){
-            setSound(false);
+    /**
+     *
+     * @param imageSound
+     *
+     * change la valeur du booleen sound
+     * change avec l image correspondante
+     */
+    public static void clickOnSoundIcon(ImageView imageSound){
+        if(sound){              //si le son est active
+            setSound(false);    //desactive le son
             try {
                 Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOff.PNG"));
-                on.setImage(image);
+                imageSound.setImage(image);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
         else{
-            setSound(true);
-            playClickSound();
+            setSound(true);     //active le son
+            playClickSound();   //joue le son du clic
             try {
                 Image image = new Image(new FileInputStream(System.getProperty("user.dir")+"/src/view/icon/soundOn.PNG"));
-                on.setImage(image);
+                imageSound.setImage(image);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    /**
+     *
+     * @param ressource
+     * joue un son
+     */
     public static void playSound(String ressource){
         if (sound){
             Media sound = new Media(new File(ressource).toURI().toString());
@@ -113,24 +165,34 @@ public class Settings {
         }
     }
 
+    /**
+     * joue le son de clic
+     */
     public static void playClickSound(){
         Settings.playSound("./resources/sounds/glass_001.mp3");
     }
 
+    /**
+     * joue le son d'erreur
+     */
     public static void playErrorSound(){
         Settings.playSound("./resources/sounds/error_006.mp3");
     }
 
+
+    /**
+     * task où l'on entraine l'IA
+     */
     public Task<Void> task = new Task<Void>() {
 
 
             @Override
             protected Void call() throws Exception {
-                int ht=h;
+                int ht=h;       //recuperation des valeurs pour l'IA
                 double lrt=lr;
                 int lt=l;
                 String namet=name;
-                String filet=file;
+                String filet=file;      //fichier où ca sera sauvegarde
                 int[] layers=new int[lt+2];
                 layers[0]=9;
                 for (int i=0; i<l;i++){
@@ -139,8 +201,8 @@ public class Settings {
                 layers[layers.length-1]=9;
 
                 try {
-                    progressBar.setVisible(true);
-                    progressText.setVisible(true);
+                    progressBar.setVisible(true);           //affiche la progressBar
+                    progressText.setVisible(true);          //affiche le text
                     System.out.println();
                     System.out.println("START TRAINING ...");
                     System.out.println();
@@ -167,14 +229,14 @@ public class Settings {
                         error += net.backPropagate(c.in, c.out);
 
                         if (i%100==0){
-                            updateMessage(i * 100 / epochs + "%");
+                            updateMessage(i * 100 / epochs + "%");  //modif le message
                         }
                         if (i % 10000 == 0) {
                             System.out.println("Error at step " + i + " is " + (error / (double) i));
                             //mainTextArea.setText(i*100/epochs + "% : Error at step "+i+" is "+ (error/(double)i));
                             //progressBar.setProgress(i/epochs);
                         }
-                        updateProgress(i, epochs);
+                        updateProgress(i, epochs);      //met a jour la progressBar
                     }
                     updateMessage(100+"%");
                     error /= epochs;
@@ -184,10 +246,10 @@ public class Settings {
                     //
                     System.out.println("Learning completed!");
 
-                    net.save(filet);
-                    Thread.sleep(1000);
-                    progressBar.setVisible(false);
-                    progressText.setVisible(false);
+                    net.save(filet);                    //sauvegarde le modele
+                    Thread.sleep(1000);            //attend 1 sec
+                    progressBar.setVisible(false);      //cache le text affichant le pourcentage
+                    progressText.setVisible(false);     //cache la progressBAr
                 /*
                 //TEST ...
                 double[] inputs = new double[]{0.0, 1.0};
@@ -207,24 +269,33 @@ public class Settings {
             }
         };
 
+    /**
+     *
+     * @param difficulte
+     * @param progressBar
+     * @param text
+     * @return true si la difficulté a été trouvé et que le modele existe deja
+     * lance l'entrainement de l'IA si la difficulté est trouvé
+     * et si le modele n'existe pas
+     */
    public boolean launchIA(String difficulte, ProgressBar progressBar, javafx.scene.text.Text text) {
-       if(readConf(difficulte)){
-           if (new File(file).exists()){
+       if(readConf(difficulte)){                //si la difficulté souhaité est dans config.txt
+           if (new File(file).exists()){        //si le modele existe deja
                MultiLayerPerceptron net=MultiLayerPerceptron.load(file);
                System.out.println("Modele charge");
                return true;
            }
-           else{
+           else{            //si le modele n'existe pas
                System.out.println("Creer nouveau modele");
                progressText=text;
                task.messageProperty().addListener((obs, oldMsg, newMsg) -> {
-                   progressText.setText(newMsg);
+                   progressText.setText(newMsg);        //modif le text a chaque modification du message
                });
                Settings.progressBar=progressBar;
                progressBar.progressProperty().unbind();
-               progressBar.progressProperty().bind(task.progressProperty());
+               progressBar.progressProperty().bind(task.progressProperty());    //lie la progressBar a la task
                Thread thread=new Thread(task);
-               thread.start();
+               thread.start();      //lance l entrainement
                //thread.join();
                // new Thread(task).start();
                System.out.println("Fini");
@@ -234,16 +305,21 @@ public class Settings {
        return false;
    }
 
+    /**
+     *
+     * @return la liste des difficultés
+     * recupere les difficultés présentes dans config.txt
+     */
    public ArrayList<String> readDifficulties(){
        try {
            File myObj = new File("./resources/config.txt");
            Scanner myReader = new Scanner(myObj);
            System.out.println("Fichier de configuration trouve");
            ArrayList<String> difficulties=new ArrayList<>();
-           while (myReader.hasNextLine()) {
+           while (myReader.hasNextLine()) {     //lecture de chaque ligne
                String data = myReader.nextLine();
                String[] confLine=data.split(":");
-               difficulties.add(confLine[0]);
+               difficulties.add(confLine[0]);       //ajout de la difficulté à la liste des difficultés
            }
            myReader.close();
            return difficulties;
@@ -254,10 +330,17 @@ public class Settings {
        return null;
    }
 
+    /**
+     *
+     * @param difficulte
+     * @return true si la difficulté est trouvé
+     *  recupere les valeurs de h,lr et l correspondant à la difficulté
+     *
+     */
     public boolean readConf(String difficulte){
         try {
             File myObj = new File("./resources/config.txt");
-            conf=new HashMap<>();
+            conf=new HashMap<>();   //la clé est la difficulté, et contient les valeurs de h, lr, l
             Scanner myReader = new Scanner(myObj);
             System.out.println("Fichier de configuration trouve");
             while (myReader.hasNextLine()) {
@@ -265,28 +348,28 @@ public class Settings {
                 String[] confLine=data.split(":");
                 conf.put(confLine[0],confLine);
             }
-            String[] searchConfig=conf.get(difficulte);
+            String[] searchConfig=conf.get(difficulte);     //cherche la diffuclté dans la hashmap
             myReader.close();
-            if (searchConfig==null){
+            if (searchConfig==null){        //si la difficulté n'est pas trouvé
                 System.out.println("Config souhaite non trouve");
                 return false;
             }
-            else{
+            else{       // si elle est trouvé
                 //System.out.println(searchConfig[0]);
-                h= Integer.valueOf(searchConfig[1]);
+                h= Integer.valueOf(searchConfig[1]);        //assigne les valeurs correspondant à la difficulté
                 lr= Double.valueOf(searchConfig[2]) ;
                 l=Integer.valueOf(searchConfig[3]);
                 name=searchConfig[0];
                 System.out.println("Difficulté :"+ difficulty+","+h+","+lr+","+l);
                 File dossier = new File("./resources/models/");
-                boolean res = dossier.mkdir();
+                boolean res = dossier.mkdir();  //cree le dossier models si il n existe pas
                 if(res) {
                     System.out.println("Le dossier a été créé.");
                 }
                 else {
                     System.out.println("Le dossier existe déja.");
                 }
-                file="./resources/models/"+"mlp_"+name+"_"+h+"_"+lr+"_"+l+".srl";
+                file="./resources/models/"+"mlp_"+name+"_"+h+"_"+lr+"_"+l+".srl";   //nom et emplacement du modele
                 return true;
             }
         } catch (FileNotFoundException e) {
@@ -296,6 +379,11 @@ public class Settings {
         return false;
     }
 
+    /**
+     *
+     * @param config
+     * supprime un modele
+     */
     public void delete(String config){
             boolean find=true;
             if (find==false){
@@ -303,12 +391,12 @@ public class Settings {
             }
             else{
                 file="./resources/models/"+config;
-                File fileToDelete = new File(file);
-                if (fileToDelete.delete()){
+                File fileToDelete = new File(file);         //modele à supprimer
+                if (fileToDelete.delete()){         //supprime le modele
                     System.out.println(fileToDelete.getName() + " est supprimé.");
 
                 }
-                else{
+                else{       //si il n existe pas
                     System.out.println("Rien a supprimer");
                 }
             }
