@@ -223,22 +223,22 @@
             <Image url="@icon/home.PNG" />
          </image>
       </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="50.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconPlayer2" fitHeight="36.0" fitWidth="36.0" layoutX="61.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@inGame/avatarDetectiveRed.PNG" />
          </image>
       </ImageView>
-      <Label fx:id="textAgainst1" layoutX="483.0" layoutY="162.0" text="Charlotte" textFill="#d7292e">
-         <font>
-            <Font name="Avenir Next Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="textVictoryOf1" alignment="CENTER" layoutX="483.0" layoutY="195.0" prefHeight="23.0" prefWidth="91.0" text="Didier" textFill="#3481eb">
+      <Label fx:id="textPlayer2" alignment="CENTER" contentDisplay="CENTER" layoutX="483.0" layoutY="195.0" prefHeight="23.0" prefWidth="91.0" text="Charlotte" textAlignment="CENTER" textFill="#d7292e">
          <font>
             <Font name="Avenir Next Bold" size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="35.0" fitWidth="36.0" layoutX="62.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="textPlayer1" alignment="CENTER" contentDisplay="CENTER" layoutX="483.0" layoutY="162.0" prefHeight="23.0" prefWidth="91.0" text="Didier" textAlignment="CENTER" textFill="#3481eb">
+         <font>
+            <Font name="Avenir Next Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="iconPlayer1" fitHeight="58.0" fitWidth="58.0" layoutX="50.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@inGame/avatarLambdaBlue.PNG" />
          </image>

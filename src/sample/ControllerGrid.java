@@ -9,8 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.ColorInput;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -37,6 +35,12 @@ public class ControllerGrid implements Initializable {
     @FXML private Button buttonQuit;
 
     List<Node> controls;
+
+    // Indication du joueur à qui c'est le tour
+    @FXML private Label textPlayer1;
+    @FXML private Label textPlayer2;
+    @FXML private ImageView iconPlayer1;
+    @FXML private ImageView iconPlayer2;
 
     // Ecran de fin  (Sur la meme scène pour avoir la partie en arrière plan)
     @FXML private Rectangle backgroundHider;
@@ -251,18 +255,18 @@ public class ControllerGrid implements Initializable {
                     // On vérifie si la partie est finie. Si non, on passe fait jouer l'IA le cas échéant ou on laisse lautre joueur jouer
                     int[] isGameFinishedResult = isGameFinished(finalI);
                     if (isGameFinishedResult == null) {  // Si la partie n'est pas finie, l'autre joueur ou l'IA joue.
-                        pionToPlay = !pionToPlay;
+                        changePlayer();
                         int aiPionPLayed = -1;
                         if (aiGameMode){
                             aiPionPLayed = playAi();
                             isGameFinishedResult = isGameFinished(aiPionPLayed);
                             if (aiPionPLayed != -1 && isGameFinishedResult != null) {  // Si on ne peut plus jouer
-                                gameFinishedResult(isGameFinishedResult);
+                                gameFinished(isGameFinishedResult);
                             }
-                            pionToPlay = !pionToPlay;
+                            changePlayer();
                         }
                     }else{  // Si on ne peut plus jouer
-                        gameFinishedResult(isGameFinishedResult);
+                        gameFinished(isGameFinishedResult);
                     }
                     event.consume();
                 }
@@ -270,7 +274,83 @@ public class ControllerGrid implements Initializable {
         }
     }
 
-    private void gameFinishedResult(int[] isGameFinishedResult) {
+    private void changePlayer(){
+        pionToPlay = !pionToPlay;
+        final Node[][] nodesToExchange = {{textPlayer1, textPlayer2},
+                                          {iconPlayer1, iconPlayer2}};
+
+        for(Node[] currentNodeGroup : nodesToExchange){
+            final double player1FromY = pionToPlay ? currentNodeGroup[1].getLayoutY() - currentNodeGroup[0].getLayoutY() : 0;
+            final double player2FromY = pionToPlay ? currentNodeGroup[0].getLayoutY() - currentNodeGroup[1].getLayoutY() : 0;
+
+            final double player1TargetY = pionToPlay ? 0 : currentNodeGroup[1].getLayoutY() - currentNodeGroup[0].getLayoutY();
+            final double player2TargetY = pionToPlay ? 0 : currentNodeGroup[0].getLayoutY() - currentNodeGroup[1].getLayoutY();
+/*
+            final double player1SizeFromX = pionToPlay ? currentNodeGroup[1].getScaleX() - currentNodeGroup[0].getScaleX() : 1;
+            final double player2SizeFromX = pionToPlay ? currentNodeGroup[0].getScaleX() - currentNodeGroup[1].getScaleX() : 1;
+            final double player1SizeFromY = pionToPlay ? currentNodeGroup[1].getScaleY() - currentNodeGroup[0].getScaleY() : 1;
+            final double player2SizeFromY = pionToPlay ? currentNodeGroup[0].getScaleY() - currentNodeGroup[1].getScaleY() : 1;
+
+            final double player1SizeTargetX = pionToPlay ? 1 : currentNodeGroup[1].getScaleX() - currentNodeGroup[0].getScaleX();
+            final double player2SizeTargetX = pionToPlay ? 1 : currentNodeGroup[0].getScaleX() - currentNodeGroup[1].getScaleX();
+            final double player1SizeTargetY = pionToPlay ? 1 : currentNodeGroup[1].getScaleY() - currentNodeGroup[0].getScaleY();
+            final double player2SizeTargetY = pionToPlay ? 1 : currentNodeGroup[0].getScaleY() - currentNodeGroup[1].getScaleY();
+
+ */
+            final double LITTLE_SIZE_FOR_PLAYER_1 = 0.6;
+            final double LITTLE_SIZE_FOR_PLAYER_2 = 0.8;
+            final double BIG_SIZE_FOR_PLAYER_2 = 1.3;
+
+            final double player1SizeFromX = pionToPlay ? LITTLE_SIZE_FOR_PLAYER_1 : 1;
+            final double player2SizeFromX = pionToPlay ? BIG_SIZE_FOR_PLAYER_2 : LITTLE_SIZE_FOR_PLAYER_2;
+            final double player1SizeFromY = pionToPlay ? LITTLE_SIZE_FOR_PLAYER_1 : 1;
+            final double player2SizeFromY = pionToPlay ? BIG_SIZE_FOR_PLAYER_2 : LITTLE_SIZE_FOR_PLAYER_2;
+
+            final double player1SizeTargetX = pionToPlay ? 1 : LITTLE_SIZE_FOR_PLAYER_1;
+            final double player2SizeTargetX = pionToPlay ? LITTLE_SIZE_FOR_PLAYER_2 : BIG_SIZE_FOR_PLAYER_2;
+            final double player1SizeTargetY = pionToPlay ? 1 : LITTLE_SIZE_FOR_PLAYER_1;
+            final double player2SizeTargetY = pionToPlay ? LITTLE_SIZE_FOR_PLAYER_2 : BIG_SIZE_FOR_PLAYER_2;
+
+
+            final TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.5), currentNodeGroup[0]);
+            translateAnimation.setCycleCount(1);
+            translateAnimation.setAutoReverse(false);
+            translateAnimation.setFromY(player1FromY);
+            translateAnimation.setToY(player1TargetY);
+            translateAnimation.setInterpolator(Interpolator.LINEAR);
+            translateAnimation.play();
+
+            final ScaleTransition scaleAnimation = new ScaleTransition(Duration.seconds(0.5), currentNodeGroup[0]);
+            scaleAnimation.setCycleCount(1);
+            scaleAnimation.setAutoReverse(false);
+            scaleAnimation.setFromX(player1SizeFromX);
+            scaleAnimation.setToX(player1SizeTargetX);
+            scaleAnimation.setFromY(player1SizeFromY);
+            scaleAnimation.setToY(player1SizeTargetY);
+            scaleAnimation.setInterpolator(Interpolator.LINEAR);
+            scaleAnimation.play();
+
+            final TranslateTransition translateAnimation2 = new TranslateTransition(Duration.seconds(0.5), currentNodeGroup[1]);
+            translateAnimation2.setCycleCount(1);
+            translateAnimation2.setAutoReverse(false);
+            translateAnimation2.setFromY(player2FromY);
+            translateAnimation2.setToY(player2TargetY);
+            translateAnimation2.setInterpolator(Interpolator.LINEAR);
+            translateAnimation2.play();
+
+            final ScaleTransition scaleAnimation2 = new ScaleTransition(Duration.seconds(0.5), currentNodeGroup[1]);
+            scaleAnimation2.setCycleCount(1);
+            scaleAnimation2.setAutoReverse(false);
+            scaleAnimation2.setFromX(player2SizeFromX);
+            scaleAnimation2.setToX(player2SizeTargetX);
+            scaleAnimation2.setFromY(player2SizeFromY);
+            scaleAnimation2.setToY(player2SizeTargetY);
+            scaleAnimation2.setInterpolator(Interpolator.LINEAR);
+            scaleAnimation2.play();
+        }
+    }
+
+    private void gameFinished(int[] isGameFinishedResult) {
         for (int i : isGameFinishedResult) {
             System.out.println(i);
             Node pion = (gameState[i] == Coup.X ? crosses : circles).get(i);
