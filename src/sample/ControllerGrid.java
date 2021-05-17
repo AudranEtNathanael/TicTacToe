@@ -346,13 +346,15 @@ public class ControllerGrid implements Initializable {
                     // On vérifie si la partie est finie. Si non, on passe fait jouer l'IA le cas échéant ou on laisse lautre joueur jouer
                     int[] isGameFinishedResult = isGameFinished(finalI);
                     if (isGameFinishedResult == null) {  // Si la partie n'est pas finie, l'autre joueur ou l'IA joue (après l'animation des pions !)
-                        scaleAnimation.setOnFinished(event2 -> {
+                        if(aiGameMode) {
+                            scaleAnimation.setOnFinished(event2 -> {
                                 changePlayer();
-                                if (aiGameMode){
-                                    playAi();
-                                }
+                                playAi();
 
-                        });
+                            });
+                        }else{
+                            changePlayer();
+                        }
                     }else{  // Si on ne peut plus jouer
                         gameFinished(isGameFinishedResult);
                     }
