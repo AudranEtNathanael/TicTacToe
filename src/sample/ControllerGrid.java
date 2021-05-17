@@ -508,11 +508,12 @@ public class ControllerGrid implements Initializable {
                 gameFinished(isGameFinishedResult);
             }
             changePlayer();
+            showPlaceholders();
         });
 
         scaleAnimation.play();
 
-        showPlaceholders();
+
 
         return caseToPlay;
     }
