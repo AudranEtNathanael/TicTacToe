@@ -25,7 +25,7 @@ import static ai.Test.loadCoupsFromFile;
 public class Settings {
 
     private static HashMap<String,String[]> conf;
-    public static String difficulty="F";
+    public static String difficulty="Facile";
     private static String name="";
     private static String file="";
 
