@@ -3,7 +3,6 @@ package sample;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import javafx.animation.*;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -127,7 +126,7 @@ public class ControllerGrid implements Initializable {
 
     private List<Circle> circles;
 
-    private boolean pionToPlay;  // true: cross; false: circle
+    private boolean crossToPlay;  // true: cross; false: circle
 
     private static boolean aiGameMode; // true: joue contre ia, false: joue contre un autre joueur.
 
@@ -200,7 +199,7 @@ public class ControllerGrid implements Initializable {
         crosses = Arrays.asList(cross0, cross1, cross2, cross3, cross4, cross5, cross6, cross7, cross8);
         circles = Arrays.asList(circle0, circle1, circle2, circle3, circle4, circle5, circle6, circle7, circle8);
 
-        pionToPlay = true;
+        crossToPlay = true;
         toggleCursor();
 
         iconPlayer1.setImage(new Image(aiGameMode ? "view/avatar/avatarLambdaBlue.png" : "view/avatar/" + avatarCrossRes + "Blue.png"));
@@ -330,13 +329,20 @@ public class ControllerGrid implements Initializable {
                     playClickSound();
                     // On joue le pion cliqué
                     hidePlaceholder(finalI);
-                    if (pionToPlay) {
-                        crosses.get(finalI).setVisible(true);
-                        gameState[finalI] = Coup.X;
-                    } else {
-                        circles.get(finalI).setVisible(true);
-                        gameState[finalI] = Coup.O;
-                    }
+                    Node node = crossToPlay ? crosses.get(finalI) : circles.get(finalI);
+                    gameState[finalI] = crossToPlay ? Coup.X : Coup.O;
+
+                    node.setVisible(true);
+
+                    final ScaleTransition scaleAnimation = new ScaleTransition(Duration.seconds(0.5), node);
+                    scaleAnimation.setCycleCount(1);
+                    scaleAnimation.setAutoReverse(true);
+                    scaleAnimation.setFromX(2);
+                    scaleAnimation.setToX(1);
+                    scaleAnimation.setFromY(2);
+                    scaleAnimation.setToY(1);
+                    scaleAnimation.setInterpolator(Interpolator.LINEAR);
+                    scaleAnimation.play();
 
                     displayGameState();
 
@@ -363,27 +369,27 @@ public class ControllerGrid implements Initializable {
     }
 
     private void changePlayer(){
-        pionToPlay = !pionToPlay;
+        crossToPlay = !crossToPlay;
         toggleCursor();
         final Node[][] nodesToExchange = {{textPlayer1, textPlayer2},
                                           {iconPlayer1, iconPlayer2}};
 
         for(Node[] currentNodeGroup : nodesToExchange){
-            final double player1FromY = pionToPlay ? currentNodeGroup[1].getLayoutY() - currentNodeGroup[0].getLayoutY() : 0;
-            final double player2FromY = pionToPlay ? currentNodeGroup[0].getLayoutY() - currentNodeGroup[1].getLayoutY() : 0;
+            final double player1FromY = crossToPlay ? currentNodeGroup[1].getLayoutY() - currentNodeGroup[0].getLayoutY() : 0;
+            final double player2FromY = crossToPlay ? currentNodeGroup[0].getLayoutY() - currentNodeGroup[1].getLayoutY() : 0;
 
-            final double player1TargetY = pionToPlay ? 0 : currentNodeGroup[1].getLayoutY() - currentNodeGroup[0].getLayoutY();
-            final double player2TargetY = pionToPlay ? 0 : currentNodeGroup[0].getLayoutY() - currentNodeGroup[1].getLayoutY();
+            final double player1TargetY = crossToPlay ? 0 : currentNodeGroup[1].getLayoutY() - currentNodeGroup[0].getLayoutY();
+            final double player2TargetY = crossToPlay ? 0 : currentNodeGroup[0].getLayoutY() - currentNodeGroup[1].getLayoutY();
 
-            double player1SizeFromX = pionToPlay ? LITTLE_SIZE : 1;
-            double player2SizeFromX = pionToPlay ? BIG_SIZE : LITTLE_SIZE;
-            double player1SizeFromY = pionToPlay ? LITTLE_SIZE : 1;
-            double player2SizeFromY = pionToPlay ? BIG_SIZE : LITTLE_SIZE;
+            double player1SizeFromX = crossToPlay ? LITTLE_SIZE : 1;
+            double player2SizeFromX = crossToPlay ? BIG_SIZE : LITTLE_SIZE;
+            double player1SizeFromY = crossToPlay ? LITTLE_SIZE : 1;
+            double player2SizeFromY = crossToPlay ? BIG_SIZE : LITTLE_SIZE;
 
-            double player1SizeTargetX = pionToPlay ? 1 : LITTLE_SIZE;
-            double player2SizeTargetX = pionToPlay ? LITTLE_SIZE : BIG_SIZE;
-            double player1SizeTargetY = pionToPlay ? 1 : LITTLE_SIZE;
-            double player2SizeTargetY = pionToPlay ? LITTLE_SIZE : BIG_SIZE;
+            double player1SizeTargetX = crossToPlay ? 1 : LITTLE_SIZE;
+            double player2SizeTargetX = crossToPlay ? LITTLE_SIZE : BIG_SIZE;
+            double player1SizeTargetY = crossToPlay ? 1 : LITTLE_SIZE;
+            double player2SizeTargetY = crossToPlay ? LITTLE_SIZE : BIG_SIZE;
 
 
             TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.5), currentNodeGroup[0]);
@@ -425,11 +431,11 @@ public class ControllerGrid implements Initializable {
     }
 
     private void toggleCursor(){
-        baseAnchor.setCursor(pionToPlay ? blueStandardMouse : redStandardMouse);
+        baseAnchor.setCursor(crossToPlay ? blueStandardMouse : redStandardMouse);
 
         for (int i=0; i<placeHolders.size(); i++){
-            placeHolders.get(i).setCursor(pionToPlay ? crossMouse : circleMouse);
-            placeHoldersSelected.get(i).setCursor(pionToPlay ? crossMouse : circleMouse);
+            placeHolders.get(i).setCursor(crossToPlay ? crossMouse : circleMouse);
+            placeHoldersSelected.get(i).setCursor(crossToPlay ? crossMouse : circleMouse);
         }
     }
 
@@ -483,6 +489,16 @@ public class ControllerGrid implements Initializable {
         gameState[caseToPlay] = Coup.O;
         circles.get(caseToPlay).setVisible(true);
 
+        final ScaleTransition scaleAnimation = new ScaleTransition(Duration.seconds(0.5), circles.get(caseToPlay));
+        scaleAnimation.setCycleCount(1);
+        scaleAnimation.setAutoReverse(true);
+        scaleAnimation.setFromX(2);
+        scaleAnimation.setToX(1);
+        scaleAnimation.setFromY(2);
+        scaleAnimation.setToY(1);
+        scaleAnimation.setInterpolator(Interpolator.LINEAR);
+        scaleAnimation.play();
+
         showPlaceholders();
 
         return caseToPlay;
@@ -497,7 +513,7 @@ public class ControllerGrid implements Initializable {
      * Retourne la position de toute les cases si la partie est finie et que personne n'as gagné
      */
     private int[] isGameFinished(int posPLayed){
-        int intPionToPlay = pionToPlay ? Coup.X : Coup.O;
+        int intPionToPlay = crossToPlay ? Coup.X : Coup.O;
         for(int[] currentPosToVerify : posToVerify[posPLayed]){
             /*
             if(gameState[currentPosToVerify[0]] == intPionToPlay && gameState[currentPosToVerify[1]] == intPionToPlay){
@@ -560,20 +576,20 @@ public class ControllerGrid implements Initializable {
         backgroundHider.setVisible(true);
 
         if(gameFinishedResult.length != 9) {
-            System.out.println("les " + (pionToPlay ? "Croix" : "Cercles") + " ont gagné");
+            System.out.println("les " + (crossToPlay ? "Croix" : "Cercles") + " ont gagné");
             if(aiGameMode){
-                textVictoryOf.setText(pionToPlay ? "Vous" : "l'IA");
-                textAgainst.setText(pionToPlay ? "l'IA" : "Vous");
+                textVictoryOf.setText(crossToPlay ? "Vous" : "l'IA");
+                textAgainst.setText(crossToPlay ? "l'IA" : "Vous");
             } else {
-                textVictoryOf.setText(pionToPlay ? player1Name : player2Name);
-                textAgainst.setText(pionToPlay ? player2Name : player1Name);
+                textVictoryOf.setText(crossToPlay ? player1Name : player2Name);
+                textAgainst.setText(crossToPlay ? player2Name : player1Name);
             }
         }else{System.out.println("Persone n'as gagné");
             textVictoryOf.setText("Personne");
             textAgainst.setText("Le destin..");
         }
-        textVictoryOf.setTextFill(Color.web(pionToPlay ? "#3481eb" : "#d7292e"));
-        textAgainst.setTextFill(Color.web(pionToPlay ? "#d7292e" : "#3481eb"));
+        textVictoryOf.setTextFill(Color.web(crossToPlay ? "#3481eb" : "#d7292e"));
+        textAgainst.setTextFill(Color.web(crossToPlay ? "#d7292e" : "#3481eb"));
         labelVictoryOf.setVisible(true);
         labelAgainst.setVisible(true);
         textVictoryOf.setVisible(true);
