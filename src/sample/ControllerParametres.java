@@ -136,7 +136,7 @@ public class ControllerParametres implements Initializable {
      */
     public void changePageToHome() throws IOException {
         playClickSound();
-        PageLoader.changePage("../view/home.fxml", this);   //change de scene
+        PageLoader.fadeOutThenChangePage("../view/home.fxml", this);   //change de scene
     }
 
     /**

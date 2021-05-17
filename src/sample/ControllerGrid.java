@@ -652,21 +652,7 @@ public class ControllerGrid implements Initializable {
 
     public void changePageToPageSample() throws IOException {
         playClickSound();
-        System.out.println("LA");
-        /*
-        Timeline timeline = new Timeline();
-        KeyFrame key = new KeyFrame(Duration.millis(2000),
-                new KeyValue(Main.getPrimaryStage().getScene().getRoot().opacityProperty(), 0));
-        timeline.getKeyFrames().add(key);
-        timeline.play();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-         */
-        PageLoader.changePage("../view/home.fxml", this);
+        PageLoader.fadeOutThenChangePage("../view/home.fxml", this);
     }
 
     public void changePageToGrid() throws IOException {
