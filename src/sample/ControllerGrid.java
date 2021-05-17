@@ -342,26 +342,26 @@ public class ControllerGrid implements Initializable {
                     scaleAnimation.setFromY(2);
                     scaleAnimation.setToY(1);
                     scaleAnimation.setInterpolator(Interpolator.LINEAR);
+
+                    // On vérifie si la partie est finie. Si non, on passe fait jouer l'IA le cas échéant ou on laisse lautre joueur jouer
+                    int[] isGameFinishedResult = isGameFinished(finalI);
+                    if (isGameFinishedResult == null) {  // Si la partie n'est pas finie, l'autre joueur ou l'IA joue (après l'animation des pions !)
+                        scaleAnimation.setOnFinished(event2 -> {
+                                changePlayer();
+                                if (aiGameMode){
+                                    playAi();
+                                }
+
+                        });
+                    }else{  // Si on ne peut plus jouer
+                        gameFinished(isGameFinishedResult);
+                    }
+
                     scaleAnimation.play();
 
                     displayGameState();
 
-                    // On vérifie si la partie est finie. Si non, on passe fait jouer l'IA le cas échéant ou on laisse lautre joueur jouer
-                    int[] isGameFinishedResult = isGameFinished(finalI);
-                    if (isGameFinishedResult == null) {  // Si la partie n'est pas finie, l'autre joueur ou l'IA joue.
-                        changePlayer();
-                        int aiPionPLayed = -1;
-                        if (aiGameMode){
-                            aiPionPLayed = playAi();
-                            isGameFinishedResult = isGameFinished(aiPionPLayed);
-                            if (aiPionPLayed != -1 && isGameFinishedResult != null) {  // Si on ne peut plus jouer
-                                gameFinished(isGameFinishedResult);
-                            }
-                            changePlayer();
-                        }
-                    }else{  // Si on ne peut plus jouer
-                        gameFinished(isGameFinishedResult);
-                    }
+
                     event.consume();
                 }
             });
@@ -497,6 +497,17 @@ public class ControllerGrid implements Initializable {
         scaleAnimation.setFromY(2);
         scaleAnimation.setToY(1);
         scaleAnimation.setInterpolator(Interpolator.LINEAR);
+
+        int finalCaseToPlay = caseToPlay;
+        scaleAnimation.setOnFinished(event -> {
+            System.out.println("Anim Ia Finished");
+            int[] isGameFinishedResult = isGameFinished(finalCaseToPlay);
+            if (finalCaseToPlay != -1 && isGameFinishedResult != null) {  // Si on ne peut plus jouer
+                gameFinished(isGameFinishedResult);
+            }
+            changePlayer();
+        });
+
         scaleAnimation.play();
 
         showPlaceholders();

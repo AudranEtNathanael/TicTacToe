@@ -226,12 +226,12 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="textPlayer2" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="118.0" text="Charlotte" textAlignment="CENTER" textFill="#d7292e">
+            <Label fx:id="textPlayer1" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="118.0" text="Didier" textAlignment="CENTER" textFill="#3481eb">
                <font>
                   <Font name="Avenir Next Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="textPlayer1" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="118.0" text="Didier" textAlignment="CENTER" textFill="#3481eb">
+            <Label fx:id="textPlayer2" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="118.0" text="Charlotte" textAlignment="CENTER" textFill="#d7292e">
                <font>
                   <Font name="Avenir Next Bold" size="20.0" />
                </font>
