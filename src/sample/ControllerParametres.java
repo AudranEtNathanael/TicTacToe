@@ -75,6 +75,7 @@ public class ControllerParametres implements Initializable {
      * initialise la scene
      */
     public void initialize(URL location, ResourceBundle resources) {
+        PageLoader.fadeIn();
         listModelFiles=new ArrayList<String>();     //initialisation de la liste de modele
         loadFiles();        //trouve les modeles existant
         makeMenuLoad();     //crée les menus grace au fichier config.txt

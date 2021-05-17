@@ -6,6 +6,7 @@ import ai.SigmoidalTransferFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
@@ -83,7 +84,7 @@ public class Controller implements Initializable  {
     private int l = 0;
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        PageLoader.fadeIn();
         makeMenuLoad();
         Settings.initializeSoundIcon(soundControl);
         controls = Arrays.asList(settings, playAgainstAi, playWithFriend, soundControl);

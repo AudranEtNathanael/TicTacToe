@@ -3,6 +3,7 @@ package sample;
 import ai.Coup;
 import ai.MultiLayerPerceptron;
 import javafx.animation.*;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -190,6 +191,7 @@ public class ControllerGrid implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Arrived on grille");
+        PageLoader.fadeIn();
         Settings.initializeSoundIcon(soundControl);
         // à ne pas mettre directement dans le constructeur : ces listes pourraient être nulle dans le corps de cette fonction (erreur testée).
         controls = Arrays.asList(homeButton, soundControl, buttonPlayAgain, buttonQuit);
@@ -634,11 +636,26 @@ public class ControllerGrid implements Initializable {
 
     public void changePageToPageSample() throws IOException {
         playClickSound();
+        System.out.println("LA");
+        /*
+        Timeline timeline = new Timeline();
+        KeyFrame key = new KeyFrame(Duration.millis(2000),
+                new KeyValue(Main.getPrimaryStage().getScene().getRoot().opacityProperty(), 0));
+        timeline.getKeyFrames().add(key);
+        timeline.play();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+         */
         PageLoader.changePage("../view/home.fxml", this);
     }
 
     public void changePageToGrid() throws IOException {
         playClickSound();
+
         PageLoader.changePage("../view/grid.fxml", this);
     }
 }
