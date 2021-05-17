@@ -121,7 +121,7 @@ public class Controller implements Initializable  {
         difficultyButton.getItems().clear();
         if (diff!=null){
             for (int i=0;i<diff.size();i++){
-                MenuItem m=new MenuItem("Load "+diff.get(i));
+                MenuItem m=new MenuItem("Selectionner "+diff.get(i));
                 m.setId(diff.get(i));
                 difficultyButton.getItems().add(m);
                 m.setOnAction(loadMenu);

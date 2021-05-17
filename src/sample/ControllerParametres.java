@@ -93,7 +93,7 @@ public class ControllerParametres implements Initializable {
         loadModel.getItems().clear();       //supprime les anciens sous menus
         if (diff!=null){
             for (int i=0;i<diff.size();i++){    //pour chaque difficulté
-                MenuItem m=new MenuItem("Load "+diff.get(i));   //creer un sous menu menu
+                MenuItem m=new MenuItem("Selectionner "+diff.get(i));   //creer un sous menu menu
                 m.setId(diff.get(i));               //definit l id du sous menu
                 loadModel.getItems().add(m);        //ajoute le sous menu au menu deroulant
                 m.setOnAction(loadMenu);            //definit l'action lorsqu un sous menu sera selectionné
@@ -110,7 +110,7 @@ public class ControllerParametres implements Initializable {
         deleteModel.getItems().clear();     //supprime les anciens sous menus
         if (listModelFiles!=null){
             for (int i=0;i<listModelFiles.size();i++){      //pour chaque modele existant
-                MenuItem m1=new MenuItem("Delete "+listModelFiles.get(i));      //creer un sous menu
+                MenuItem m1=new MenuItem("Supprimer "+listModelFiles.get(i));      //creer un sous menu
                 m1.setId(listModelFiles.get(i));            //definit l'id
                 deleteModel.getItems().add(m1);             //ajoute le sous menu
                 m1.setOnAction(deleteMenu);                 //definit l'action
