@@ -6,6 +6,7 @@ import ai.SigmoidalTransferFunction;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,6 +46,9 @@ import static sample.Settings.*;
 
 public class Controller implements Initializable  {
 
+    // Pour pouvoir faire (Stage) baseAnchor.getScene().getWindow()
+    @FXML AnchorPane baseAnchor;
+
     // Boutons de contrôle
     @FXML private ImageView settings;
     @FXML private ImageView playAgainstAi;
@@ -79,6 +83,7 @@ public class Controller implements Initializable  {
     private int l = 0;
 
     public void initialize(URL location, ResourceBundle resources) {
+
         makeMenuLoad();
         Settings.initializeSoundIcon(soundControl);
         controls = Arrays.asList(settings, playAgainstAi, playWithFriend, soundControl);
@@ -88,30 +93,12 @@ public class Controller implements Initializable  {
             controls.get(finalI).addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    /*
                     ColorAdjust colorAdjust = new ColorAdjust();
-                    colorAdjust.setContrast(0.3);
+                    //colorAdjust.setContrast(0.3);
                     colorAdjust.setHue(-0.05);
-                    colorAdjust.setBrightness(0.9);
-                    colorAdjust.setSaturation(0.7);
-                    homeButton.setEffect(colorAdjust);
-
-                     */
-
-                    final int UI_ANIMATION_TIME_MSEC = 100;
-
-                    final double MIN_RADIUS = 0.0;
-                    final double MAX_RADIUS = 2.0;
-                    // Create Gaussian Blur effect with radius = 0
-                    GaussianBlur blur = new GaussianBlur(MIN_RADIUS);
-                    controls.get(finalI).setEffect(blur);
-
-                    // Create animation effect
-                    Timeline timeline = new Timeline();
-                    KeyValue kv = new KeyValue(blur.radiusProperty(), MAX_RADIUS);
-                    KeyFrame kf = new KeyFrame(Duration.millis(UI_ANIMATION_TIME_MSEC), kv);
-                    timeline.getKeyFrames().add(kf);
-                    timeline.play();
+                    colorAdjust.setBrightness(0.5);
+                    //colorAdjust.setSaturation(0.7);
+                    controls.get(finalI).setEffect(colorAdjust);
                 }
             });
 

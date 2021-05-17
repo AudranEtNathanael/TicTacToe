@@ -1,6 +1,8 @@
 package sample;
 
 import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +10,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.awt.event.FocusEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -25,6 +29,7 @@ import static sample.Settings.*;
 //import javax.swing.*;
 
 public class ControllerPlayerMenu implements Initializable {
+
 
     // ressources pour le curseur de souris
     @FXML AnchorPane baseAnchor;
@@ -72,6 +77,8 @@ public class ControllerPlayerMenu implements Initializable {
         initializeSoundIcon(soundControl);
         toggleCursor();
 
+        pseudoField.setFocusTraversable(false);
+        pseudoField.setStyle("-fx-text-inner-color: #3481eb;");
         textTitle.setText("Joueur 1");
 
         controls = Arrays.asList(homeButton, soundControl, validateButton, avatar1, avatar2, avatar3, avatar4, avatar5);
@@ -107,41 +114,45 @@ public class ControllerPlayerMenu implements Initializable {
             System.out.println(e);
         }
 
-
         for(int i=0; i<controls.size(); i++) {
             int finalI = i;
             controls.get(finalI).addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
 
-                    final int UI_ANIMATION_TIME_MSEC = 100;
+                    ColorAdjust colorAdjust = new ColorAdjust();
+                    //colorAdjust.setContrast(0.3);
+                    colorAdjust.setHue(-0.05);
+                    colorAdjust.setBrightness(0.5);
+                    //colorAdjust.setSaturation(0.7);
+                    controls.get(finalI).setEffect(colorAdjust);
+                }
+            });
 
-                    final double MIN_RADIUS = 0.0;
-                    final double MAX_RADIUS = 2.0;
+            controls.get(finalI).addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    final double RADIUS = 0.0;
                     // Create Gaussian Blur effect with radius = 0
-                    GaussianBlur blur = new GaussianBlur(MIN_RADIUS);
+                    GaussianBlur blur = new GaussianBlur(RADIUS);
                     controls.get(finalI).setEffect(blur);
-
-                    // Create animation effect
-                    Timeline timeline = new Timeline();
-                    KeyValue kv = new KeyValue(blur.radiusProperty(), MAX_RADIUS);
-                    KeyFrame kf = new KeyFrame(Duration.millis(UI_ANIMATION_TIME_MSEC), kv);
-                    timeline.getKeyFrames().add(kf);
-                    timeline.play();
                 }
             });
         }
 
 
+
         validateButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("VALIDATE");
                 if(crossToChoose){
                     setCrossToChoose(false);
-                    ControllerGrid.setplayer1Name(pseudoField.getText() != "" ? pseudoField.getText() : "Croix");
+                    toggleCursor();
+                    ControllerGrid.setplayer1Name(!pseudoField.getText().equals("") ? pseudoField.getText() : "Croix");
                     textTitle.setText("Joueur 2");
                     textTitle.setTextFill(Color.web("#d7292e"));
+                    pseudoField.setFocusTraversable(false);
+                    pseudoField.setStyle("-fx-text-inner-color: #d7292e;");
                     pseudoField.setText("");
                     String avatarSetInGameForCross = ControllerGrid.getAvatarCrossRes();
                     avatarsRes.get(avatarSetInGameForCross).setImage(new Image("view/avatar/" + avatarSetInGameForCross + "Grey.png"));
@@ -149,7 +160,7 @@ public class ControllerPlayerMenu implements Initializable {
                     avatarsRes.get(avatarSetInGameForCircle).setImage(new Image("view/avatar/" + avatarSetInGameForCircle + "Red.png"));
                 }else{
                     try {
-                        ControllerGrid.setplayer2Name(pseudoField.getText() != "" ? pseudoField.getText() : "Cercles");
+                        ControllerGrid.setplayer2Name(!pseudoField.getText().equals("") ? pseudoField.getText() : "Cercles");
                         changePageToGrid();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -163,6 +174,10 @@ public class ControllerPlayerMenu implements Initializable {
 
     private void toggleCursor(){
         baseAnchor.setCursor(crossToChoose ? blueStandardMouse : redStandardMouse);
+    }
+
+    public void clickSound(){
+        Settings.clickOnSoundIcon(soundControl);
     }
 
     public void changePageToPlayerMenu() throws IOException {

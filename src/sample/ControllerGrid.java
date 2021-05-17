@@ -10,6 +10,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -249,15 +250,15 @@ public class ControllerGrid implements Initializable {
             controls.get(finalI).addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    /*
-                    ColorAdjust colorAdjust = new ColforAdjust();
-                    colorAdjust.setContrast(0.3);
-                    colorAdjust.setHue(-0.05);
-                    colorAdjust.setBrightness(0.9);
-                    colorAdjust.setSaturation(0.7);
-                    homeButton.setEffect(colorAdjust);
 
-                     */
+                    ColorAdjust colorAdjust = new ColorAdjust();
+                    //colorAdjust.setContrast(0.3);
+                    colorAdjust.setHue(-0.05);
+                    colorAdjust.setBrightness(0.5);
+                    //colorAdjust.setSaturation(0.7);
+                    controls.get(finalI).setEffect(colorAdjust);
+
+                     /*
 
                     final int UI_ANIMATION_TIME_MSEC = 100;
 
@@ -273,6 +274,8 @@ public class ControllerGrid implements Initializable {
                     KeyFrame kf = new KeyFrame(Duration.millis(UI_ANIMATION_TIME_MSEC), kv);
                     timeline.getKeyFrames().add(kf);
                     timeline.play();
+
+                      */
                 }
             });
 
@@ -556,8 +559,13 @@ public class ControllerGrid implements Initializable {
 
         if(gameFinishedResult.length != 9) {
             System.out.println("les " + (pionToPlay ? "Croix" : "Cercles") + " ont gagné");
-            textVictoryOf.setText(pionToPlay ? "Croix" : "Cercles");
-            textAgainst.setText(pionToPlay ? "Cercles" : "Croix");
+            if(aiGameMode){
+                textVictoryOf.setText(pionToPlay ? "Vous" : "l'ordinateur");
+                textAgainst.setText(pionToPlay ? "l'ordinateur" : "Vous");
+            } else {
+                textVictoryOf.setText(pionToPlay ? player1Name : player2Name);
+                textAgainst.setText(pionToPlay ? player2Name : player1Name);
+            }
         }else{System.out.println("Persone n'as gagné");
             textVictoryOf.setText("Personne");
             textAgainst.setText("Le destin..");
