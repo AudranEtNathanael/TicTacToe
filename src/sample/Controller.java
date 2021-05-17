@@ -166,7 +166,7 @@ public class Controller implements Initializable  {
         System.out.println("Lancement de la partie");
         ControllerGrid.setAiGameMode(false);
         ControllerPlayerMenu.setCrossToChoose(true);
-        PageLoader.changePage("../view/menuPlayer.fxml", this);
+        PageLoader.fadeOutThenChangePage("../view/menuPlayer.fxml", this);
     }
 
     public void launchGameAgainstIA() throws IOException {
@@ -175,7 +175,7 @@ public class Controller implements Initializable  {
         Settings settings=new Settings();
         if(settings.launchIA(difficulty,mainProgressBar,percentText)){
             ControllerGrid.setAiGameMode(true);
-            PageLoader.changePage("../view/grid.fxml", this);
+            PageLoader.fadeOutThenChangePage("../view/grid.fxml",this);
         }
         else{
             System.out.println("Veuillez sélectionner une difficulté");
@@ -196,7 +196,7 @@ public class Controller implements Initializable  {
     public void changePageToSettings() throws IOException {
 
         playClickSound();
-        PageLoader.changePage("../view/settings.fxml", this);
+        PageLoader.fadeOutThenChangePage("../view/settings.fxml", this);
     }
 
 }
