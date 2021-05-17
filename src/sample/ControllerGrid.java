@@ -560,8 +560,8 @@ public class ControllerGrid implements Initializable {
         if(gameFinishedResult.length != 9) {
             System.out.println("les " + (pionToPlay ? "Croix" : "Cercles") + " ont gagné");
             if(aiGameMode){
-                textVictoryOf.setText(pionToPlay ? "Vous" : "l'ordinateur");
-                textAgainst.setText(pionToPlay ? "l'ordinateur" : "Vous");
+                textVictoryOf.setText(pionToPlay ? "Vous" : "l'IA");
+                textAgainst.setText(pionToPlay ? "l'IA" : "Vous");
             } else {
                 textVictoryOf.setText(pionToPlay ? player1Name : player2Name);
                 textAgainst.setText(pionToPlay ? player2Name : player1Name);
