@@ -49,8 +49,8 @@ public class PageLoader {
 
         DoubleProperty opacity = Main.getPrimaryStage().opacityProperty();
         Timeline fadeIn = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0)),        //opacité à 0 au debut de l'animation
-                new KeyFrame(new Duration(800), new KeyValue(opacity, 1.0))    //opacité à 1 apres 1seconde
+                new KeyFrame(Duration.ZERO, new KeyValue(opacity, 0.3)),        //opacité à 0 au debut de l'animation
+                new KeyFrame(new Duration(700), new KeyValue(opacity, 1.0))    //opacité à 1 apres 1seconde
         );
         fadeIn.play();  //joue la transition
         return fadeIn;
@@ -64,7 +64,7 @@ public class PageLoader {
         DoubleProperty opacity = Main.getPrimaryStage().opacityProperty();
         Timeline fadeOut = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(opacity, 1)),
-                new KeyFrame(new Duration(800), new KeyValue(opacity, 0))
+                new KeyFrame(new Duration(400), new KeyValue(opacity, 0.6))
         );
         fadeOut.play();  //joue la transition
         return fadeOut;
@@ -75,6 +75,7 @@ public class PageLoader {
         Timeline fadeOut=PageLoader.fadeOut();
         fadeOut.setOnFinished(e -> {
             try {
+
                 PageLoader.changePage(page, object);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
