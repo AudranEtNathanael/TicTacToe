@@ -74,6 +74,7 @@ public class ControllerPlayerMenu implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Arrived on PlayerMenu");
+        PageLoader.fadeIn();
         initializeSoundIcon(soundControl);
         toggleCursor();
 
